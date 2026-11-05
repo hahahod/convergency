@@ -46,6 +46,110 @@
       overflow-x: hidden;
     }
 
+    /* Force Desktop Mode CSS Overrides */
+    body.force-pc-mode {
+      min-width: 1240px !important;
+      width: 1240px !important;
+      overflow-x: auto !important;
+    }
+    body.force-pc-mode .wrap {
+      max-width: 1200px !important;
+      width: 1200px !important;
+      padding: 0 32px !important;
+    }
+    body.force-pc-mode .nav-links {
+      display: flex !important;
+      position: static !important;
+      flex-direction: row !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      gap: 24px !important;
+    }
+    body.force-pc-mode .mobile-toggle {
+      display: none !important;
+    }
+    body.force-pc-mode .nav > .btn {
+      display: inline-flex !important;
+    }
+    body.force-pc-mode .hero-grid {
+      grid-template-columns: 1.15fr 1fr !important;
+    }
+    body.force-pc-mode .pipeline {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+    body.force-pc-mode .pipeline .stage {
+      border-right: 1px solid var(--line) !important;
+      border-bottom: 0 !important;
+    }
+    body.force-pc-mode .pipeline .stage:last-child {
+      border-right: 0 !important;
+    }
+    body.force-pc-mode .two-col,
+    body.force-pc-mode .code-grid,
+    body.force-pc-mode .company-grid {
+      grid-template-columns: 1fr 1fr !important;
+    }
+    body.force-pc-mode .final-phones {
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+    body.force-pc-mode .final-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+    body.force-pc-mode .rq-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+    body.force-pc-mode .rq {
+      border-right: 1px solid var(--line) !important;
+    }
+    body.force-pc-mode .rq:nth-child(3n) {
+      border-right: 0 !important;
+    }
+    body.force-pc-mode .rq:last-child {
+      grid-column: span 3 !important;
+      display: grid !important;
+      grid-template-columns: 80px 1fr !important;
+    }
+    body.force-pc-mode .api-bottom,
+    body.force-pc-mode .footer-inner,
+    body.force-pc-mode .section-head {
+      flex-direction: row !important;
+      align-items: center !important;
+    }
+    body.force-pc-mode .hero-strip {
+      flex-wrap: nowrap !important;
+    }
+    body.force-pc-mode .hero-strip > span {
+      width: auto !important;
+    }
+
+    /* Floating Switch Indicator Banner */
+    #pc-mode-banner {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      background: #111827;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 999px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(251, 191, 36, 0.6);
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      animation: bannerSlideUp 0.3s ease;
+    }
+    @keyframes bannerSlideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    body.force-pc-mode #pc-mode-banner {
+      display: flex;
+    }
+
     h1, h2, h3, h4, p { margin: 0; }
     h1, h2, h3, h4 {
       line-height: 1.15;
@@ -2149,16 +2253,16 @@
               <span class="r-ko" lang="ko">Convergency 연구 로드맵</span>
             </h2>
             <p class="subline">
-              <span class="r-en">What We Study: Foundations of Retention &amp; Knowledge Tracing</span>
+              <span class="r-en">What We Study: Cognitive Foundations of Retention &amp; Knowledge Tracing</span>
               <span class="r-ko" lang="ko">연구 주제: 인지과학적 망각 메커니즘과 지식 추적 모델</span>
             </p>
           </div>
           <p>
-            <span class="r-en">Inspired by Riiid SAINT &amp; EdNet Papers</span>
-            <span class="r-ko" lang="ko">Riiid SAINT 및 EdNet 연구 기반</span><br/>
+            <span class="r-en">Theoretical Foundations &amp; Literature</span>
+            <span class="r-ko" lang="ko">학술 이론 및 문헌 기반</span><br/>
             <span class="fine">
-              <span class="r-en">Independent research directions; no official affiliation implied.</span>
-              <span class="r-ko" lang="ko">독립적인 학술 연구 방향이며 공식 제휴를 뜻하지 않습니다.</span>
+              <span class="r-en">Independent scientific inquiries in Transformer Knowledge Tracing.</span>
+              <span class="r-ko" lang="ko">트랜스포머 기반 지식 추적에 관한 독자적인 학술 연구 방향입니다.</span>
             </span>
           </p>
         </div>
@@ -2197,7 +2301,7 @@
           </article>
           <article class="rq">
             <span>RQ07</span>
-            <h3><span class="r-en">How to predict retention with Transformer (SAINT)?</span><span class="r-ko" lang="ko">SAINT 트랜스포머로 망각을 어떻게 예측할 것인가?</span></h3>
+            <h3><span class="r-en">How to predict retention with Transformer KT?</span><span class="r-ko" lang="ko">트랜스포머 기반 모델로 망각을 어떻게 예측할 것인가?</span></h3>
             <p><span class="r-en">Separating exercise tokens from response tokens in continuous self-attention.</span><span class="r-ko" lang="ko">자기주의 메커니즘에서 문항 임베딩과 응답 임베딩을 분리 인코딩합니다.</span></p>
           </article>
         </div>
@@ -2206,19 +2310,141 @@
         <div class="theories">
           <div class="theory">
             <span>DKT</span>
-            <small><span class="r-en">Deep Knowledge Tracing</span><span class="r-ko" lang="ko">심층 지식 추적 (RNN/LSTM)</span></small>
+            <small><span class="r-en">Deep Knowledge Tracing</span><span class="r-ko">심층 지식 추적 (RNN/LSTM)</span></small>
           </div>
           <div class="theory">
             <span>IRT</span>
             <small>P(θ) = 1 / (1 + exp(-a(θ - b)))</small>
           </div>
           <div class="theory">
-            <span><span class="r-en">Forgetting Curve</span><span class="r-ko" lang="ko">에빙하우스 망각곡선</span></span>
+            <span><span class="r-en">Forgetting Curve</span><span class="r-ko">에빙하우스 망각곡선</span></span>
             <small>p(t) = exp(-t / S)</small>
           </div>
           <div class="theory">
-            <span>SAINT</span>
-            <small><span class="r-en">Separated Self-Attention KT</span><span class="r-ko" lang="ko">분리형 어텐션 지식 추적</span></small>
+            <span>Transformer KT</span>
+            <small><span class="r-en">Self-Attentive Sequence Modeling</span><span class="r-ko">자기주의 지식 추적 모델</span></small>
+          </div>
+        </div>
+
+        <div class="final-addition">
+          <h2>
+            <span class="r-en">Published foundations and validation criteria</span>
+            <span class="r-ko">학술 연구 근거와 엄격한 검증 기준</span>
+          </h2>
+          <div class="final-grid">
+            <article>
+              <h3><span class="r-en">DKT &amp; Transformer KT</span><span class="r-ko">DKT 및 트랜스포머 지식 추적</span></h3>
+              <p>
+                <span class="r-en">Sequence modeling and separated exercise/response representations inform our design. Open academic peer-reviewed research validates the mathematical rigor behind our context trace.</span>
+                <span class="r-ko">시퀀스 모델링과 문항/응답 분리 표현 아키텍처는 학계에 입증된 수학적 정밀성을 제공합니다. 공인된 인공지능 지식 추적 이론을 기반으로 언어 습득에 최적화된 기억 보존 메커니즘을 연구합니다.</span>
+              </p>
+            </article>
+            <article>
+              <h3><span class="r-en">Fair validation</span><span class="r-ko">공정한 벤치마크 원칙</span></h3>
+              <p>
+                <span class="r-en">Plan learner-separated cross-validation, temporal causality isolation, calibration error testing, and delayed recall transfer checks.</span>
+                <span class="r-ko">학습자 분리 교차검증, 시간 인과관계 격리, 신뢰도 보정 오차(ECE) 측정 및 지연 회상 전이 효과를 엄격히 분리 평가합니다.</span>
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="https://arxiv.org/abs/1506.05908" rel="noopener" target="_blank">
+            DKT Research (arXiv) <span aria-hidden="true">↗</span>
+          </a>
+          <a class="btn" href="#technology">
+            <span class="r-en">View Engine Architecture</span>
+            <span class="r-ko">엔진 아키텍처 확인</span> <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="section section-alt" id="research">
+      <div class="wrap">
+        <div class="eyebrow">
+          <span class="r-en">03 / Research</span>
+          <span class="r-ko">03 / 연구 방향</span>
+        </div>
+        <div class="section-head">
+          <div>
+            <h2>
+              <span class="r-en">Convergency Research Directions</span>
+              <span class="r-ko">Convergency 연구 로드맵</span>
+            </h2>
+            <p class="subline">
+              <span class="r-en">What We Study: Foundations of Retention &amp; Knowledge Tracing</span>
+              <span class="r-ko">연구 주제: 인지과학적 망각 메커니즘과 지식 추적 모델</span>
+            </p>
+          </div>
+          <p>
+            <span class="r-en">Transformer-based Knowledge Tracing &amp; Cognitive Retention</span>
+            <span class="r-ko">트랜스포머 기반 지식 추적 및 인지 망각 이론 연구</span><br/>
+            <span class="fine">
+              <span class="r-en">Independent foundational research inquiries.</span>
+              <span class="r-ko">자체적인 지식 추적 및 기억 보존 연구 방향입니다.</span>
+            </span>
+          </p>
+        </div>
+
+        <!-- Research Questions Grid (RQ01 - RQ07) -->
+        <div class="rq-grid">
+          <article class="rq">
+            <span>RQ01</span>
+            <h3><span class="r-en">When do learners forget?</span><span class="r-ko">학습자는 언제 망각하는가?</span></h3>
+            <p><span class="r-en">Quantifying the Ebbinghaus Decay factor across speech sessions.</span><span class="r-ko">회화 세션 간 에빙하우스 기억 감쇠 상수를 정량화합니다.</span></p>
+          </article>
+          <article class="rq">
+            <span>RQ02</span>
+            <h3><span class="r-en">Why do learners forget?</span><span class="r-ko">학습자는 왜 망각하는가?</span></h3>
+            <p><span class="r-en">Investigating cognitive interference and phonetic transfer effects.</span><span class="r-ko">인지적 간섭과 모국어 음운 간섭 효과를 분석합니다.</span></p>
+          </article>
+          <article class="rq">
+            <span>RQ03</span>
+            <h3><span class="r-en">Which factors accelerate decay?</span><span class="r-ko">망각을 가속하는 요인은 무엇인가?</span></h3>
+            <p><span class="r-en">Syntactic complexity vs contextual emotional pressure.</span><span class="r-ko">구문 복잡도와 발화 시 상황적 압박의 상관관계를 규명합니다.</span></p>
+          </article>
+          <article class="rq">
+            <span>RQ04</span>
+            <h3><span class="r-en">How does spacing optimize retention?</span><span class="r-ko">학습 간격은 기억 유지에 어떤 영향을 주는가?</span></h3>
+            <p><span class="r-en">Dynamic interval scheduling based on real-time mastery scores.</span><span class="r-ko">실시간 숙련도 추정에 기초한 동적 반복 주기 알고리즘을 설계합니다.</span></p>
+          </article>
+          <article class="rq">
+            <span>RQ05</span>
+            <h3><span class="r-en">Do individual differences matter?</span><span class="r-ko">개인차는 학습 곡선에 어떻게 작용하는가?</span></h3>
+            <p><span class="r-en">Incorporating learner prior ability theta into sequential decay.</span><span class="r-ko">잠재 학습 능력치 theta를 시계열 감쇠 모델에 결합합니다.</span></p>
+          </article>
+          <article class="rq">
+            <span>RQ06</span>
+            <h3><span class="r-en">Can retrieval practice minimize forgetting?</span><span class="r-ko">인출 연습은 망각을 얼마나 방지할 수 있는가?</span></h3>
+            <p><span class="r-en">Active recall drills vs passive listening feedback ablation.</span><span class="r-ko">능동적 발화 인출 훈련과 수동적 청취 피드백의 효능을 비교합니다.</span></p>
+          </article>
+          <article class="rq">
+            <span>RQ07</span>
+            <h3><span class="r-en">How to predict retention with Transformer KT?</span><span class="r-ko">트랜스포머 지식 추적으로 망각을 어떻게 예측할 것인가?</span></h3>
+            <p><span class="r-en">Separating exercise tokens from response tokens in continuous self-attention.</span><span class="r-ko">자기주의 메커니즘에서 문항 임베딩과 응답 임베딩을 분리 인코딩합니다.</span></p>
+          </article>
+        </div>
+
+        <!-- Theories Badges -->
+        <div class="theories">
+          <div class="theory">
+            <span>DKT</span>
+            <small><span class="r-en">Deep Knowledge Tracing</span><span class="r-ko">심층 지식 추적 (RNN/LSTM)</span></small>
+          </div>
+          <div class="theory">
+            <span>IRT</span>
+            <small>P(θ) = 1 / (1 + exp(-a(θ - b)))</small>
+          </div>
+          <div class="theory">
+            <span><span class="r-en">Forgetting Curve</span><span class="r-ko">에빙하우스 망각곡선</span></span>
+            <small>p(t) = exp(-t / S)</small>
+          </div>
+          <div class="theory">
+            <span>Transformer KT</span>
+            <small><span class="r-en">Self-Attentive Knowledge Tracing</span><span class="r-ko">자기주의 지식 추적 모델</span></small>
           </div>
         </div>
 
@@ -2229,7 +2455,7 @@
           </h2>
           <div class="final-grid">
             <article>
-              <h3>DKT &amp; SAINT</h3>
+              <h3>DKT &amp; SAKT / TKT</h3>
               <p>
                 <span class="r-en">Sequence modeling and separated exercise/response representations inform our design. Published academic foundations validate the mathematical rigor behind our context trace.</span>
                 <span class="r-ko" lang="ko">시퀀스 모델링과 문항/응답 분리 표현 아키텍처는 학계에 입증된 수학적 정밀성을 제공합니다. 공신력 있는 모델을 기반으로 언어 습득에 최적화된 변형을 연구합니다.</span>
@@ -2249,8 +2475,8 @@
           <a class="btn" href="https://arxiv.org/abs/1506.05908" rel="noopener" target="_blank">
             DKT Paper (arXiv) <span aria-hidden="true">↗</span>
           </a>
-          <a class="btn" href="https://arxiv.org/abs/2002.07033" rel="noopener" target="_blank">
-            SAINT Paper (arXiv) <span aria-hidden="true">↗</span>
+          <a class="btn" href="https://arxiv.org/abs/1907.06837" rel="noopener" target="_blank">
+            SAKT Paper (arXiv) <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
@@ -2536,12 +2762,26 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
         <span class="r-en">Learning Intelligence. AI x Education © 2026 Convergency Inc.</span>
         <span class="r-ko" lang="ko">학습 지능. AI × 교육 © 2026 Convergency Inc. All rights reserved.</span>
       </span>
-      <a href="#home" style="font-weight:600">
-        <span class="r-en">Back to top ↑</span>
-        <span class="r-ko" lang="ko">맨 위로 이동 ↑</span>
-      </a>
+      <div style="display:flex; align-items:center; gap:16px;">
+        <button id="toggle-viewport-btn" type="button" class="btn small-btn" style="border-radius:6px; font-size:11px; padding:6px 12px; min-height:32px;">
+          <span class="r-en" id="view-mode-label-en">🖥️ Switch to PC View</span>
+          <span class="r-ko" id="view-mode-label-ko" lang="ko">🖥️ PC버전으로 보기</span>
+        </button>
+        <a href="#home" style="font-weight:600">
+          <span class="r-en">Back to top ↑</span>
+          <span class="r-ko" lang="ko">맨 위로 이동 ↑</span>
+        </a>
+      </div>
     </div>
   </footer>
+
+  <!-- Floating Banner when in PC View Mode -->
+  <div id="pc-mode-banner">
+    <span>🖥️ <span class="r-en">Desktop Mode Active (1200px)</span><span class="r-ko" lang="ko">PC 모드 적용 중 (1200px)</span></span>
+    <button id="banner-return-btn" class="btn btn-yellow small-btn" style="padding:4px 10px; font-size:11px; min-height:28px;">
+      <span class="r-en">Back to Mobile</span><span class="r-ko" lang="ko">모바일로 복귀</span>
+    </button>
+  </div>
 
   <!-- Playground Dialog Modal -->
   <dialog aria-labelledby="play-title" id="playground">
@@ -3019,6 +3259,44 @@ Status: Prepared locally. Ready to share with your evaluation team.`;
       window.addEventListener('afterprint', () => {
         document.body.classList.remove('print-spec');
       });
+    }
+
+    // 11. Functional Mobile / Desktop (PC Mode) Switcher
+    const viewportMeta = document.querySelector('meta[name="viewport"]');
+    const toggleViewportBtn = document.getElementById('toggle-viewport-btn');
+    const bannerReturnBtn = document.getElementById('banner-return-btn');
+    const labelEn = document.getElementById('view-mode-label-en');
+    const labelKo = document.getElementById('view-mode-label-ko');
+    let isForcedPcMode = false;
+
+    function applyViewMode(forcePc) {
+      isForcedPcMode = forcePc;
+
+      if (isForcedPcMode) {
+        document.body.classList.add('force-pc-mode');
+        if (viewportMeta) {
+          viewportMeta.setAttribute('content', 'width=1240, initial-scale=0.32, minimum-scale=0.1, maximum-scale=3.0, user-scalable=yes');
+        }
+        if (labelEn) labelEn.textContent = '📱 Switch to Mobile View';
+        if (labelKo) labelKo.textContent = '📱 모바일버전으로 보기';
+      } else {
+        document.body.classList.remove('force-pc-mode');
+        if (viewportMeta) {
+          viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1');
+        }
+        if (labelEn) labelEn.textContent = '🖥️ Switch to PC View';
+        if (labelKo) labelKo.textContent = '🖥️ PC버전으로 보기';
+      }
+
+      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event('scroll'));
+    }
+
+    if (toggleViewportBtn) {
+      toggleViewportBtn.addEventListener('click', () => applyViewMode(!isForcedPcMode));
+    }
+    if (bannerReturnBtn) {
+      bannerReturnBtn.addEventListener('click', () => applyViewMode(false));
     }
   </script>
 </body>
