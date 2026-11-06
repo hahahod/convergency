@@ -6,11 +6,20 @@
   <meta content="light" name="color-scheme"/>
   <meta content="#FFFFFF" name="theme-color"/>
   <meta content="Convergency — Learning Intelligence. Persistent Context Retention Engine (LTM) & Adaptive Speech Learning." name="description"/>
-  <title>Convergency — Learning Intelligence | AI x Education (v1.1.3)</title>
+  <title>Convergency — Learning Intelligence | AI x Education (v1.2.1)</title>
   
-  <!-- Convergency Official Logo Favicon (Bold 12px Stroke, High-Contrast Dark-Mode Yellow Dot, Zero-Clip ViewBox) -->
+  <!-- Open Graph / Social Sharing Meta Tags (Light Theme Preview) -->
+  <meta property="og:title" content="Convergency — Learning Intelligence | AI x Education"/>
+  <meta property="og:description" content="Persistent Context Retention Engine (LTM) & Adaptive Speech Learning. Connecting learning science, structured memory, and adaptive interaction."/>
+  <meta property="og:image" content="https://aiconvergency.com/og-light-thumbnail.png"/>
+  <meta property="og:url" content="https://aiconvergency.com"/>
+  <meta property="og:type" content="website"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Convergency — Learning Intelligence"/>
+  <meta name="twitter:description" content="Persistent Context Retention Engine (LTM) & Adaptive Speech Learning."/>
+
+  <!-- Convergency Official Logo Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-12 -12 124 124'%3E%3Cstyle%3E.cv-line%7Bstroke:%23111827;fill:none;stroke-width:12;stroke-linecap:round;stroke-linejoin:round%7D@media(prefers-color-scheme:dark)%7B.cv-line%7Bstroke:%23FFFFFF%7D%7D%3C/style%3E%3Cpath class='cv-line' d='M75 27 A38 38 0 1 0 70 73'/%3E%3Cpolyline class='cv-line' points='62,18 75,27 65,43'/%3E%3Ccircle cx='70' cy='73' r='10' fill='%23FBBF24' stroke='%23000000' stroke-width='2'/%3E%3C/svg%3E"/>
-  <link rel="icon" type="image/png" href="favicon.png"/>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -67,6 +76,7 @@
       box-shadow: none !important;
       padding: 0 !important;
       gap: 24px !important;
+      width: auto !important;
     }
     body.force-pc-mode .mobile-toggle {
       display: none !important;
@@ -1358,7 +1368,7 @@
       overflow-y: auto;
     }
 
-    /* Feature 1: Noticeable, Satisfying Scroll Reveal Animation (v1.0.6) */
+    /* Scroll Reveal Animation */
     .cv-reveal {
       opacity: 0;
       transform: translateY(28px);
@@ -1370,7 +1380,7 @@
       transform: translateY(0);
     }
 
-    /* Responsive Breakpoints & Button Preservation */
+    /* Responsive Breakpoints & Centered Layout Fixes */
     @media (max-width: 980px) {
       .hero-grid, .two-col, .company-grid, .code-grid { grid-template-columns: 1fr; }
       .pipeline { grid-template-columns: 1fr 1fr; }
@@ -1388,6 +1398,8 @@
         top: 76px;
         left: 0;
         right: 0;
+        width: 100%;
+        box-sizing: border-box;
         background: rgba(255, 255, 255, 0.88);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
@@ -1510,8 +1522,8 @@
               </a>
             </div>
             <p class="hero-note">
-              <span class="r-en">Converge Engine LTM v0.1 · Proposed architecture</span>
-              <span class="r-ko" lang="ko">Converge Engine LTM v0.1 · 제안 아키텍처</span>
+              <span class="r-en">Converge Engine LTM v1.2.1 · Official release</span>
+              <span class="r-ko" lang="ko">Converge Engine LTM v1.2.1 · 정식 릴리스</span>
             </p>
           </div>
 
@@ -1520,7 +1532,7 @@
             <div class="engine-view">
               <div class="window-title">
                 <i></i><i></i><i></i>
-                <span>CONVERGE ENGINE / LTM v0.1</span>
+                <span>CONVERGE ENGINE / LTM v1.2.1</span>
               </div>
               <div class="engine-body">
                 <div class="trace-top">
@@ -1627,7 +1639,7 @@
         <div class="section-head cv-reveal">
           <div>
             <h2>
-              Converge Engine LTM v0.1<br/>
+              Converge Engine LTM v1.2.1<br/>
               <span class="r-en">4-Stage Pipeline</span>
               <span class="r-ko" lang="ko">4단계 처리 흐름</span>
             </h2>
@@ -1639,7 +1651,7 @@
           <p>
             <span class="r-en">From a spoken interaction to a persistent learning trace.</span>
             <span class="r-ko" lang="ko">음성 발화에서 영속적인 학습 기록으로 변환.</span><br/>
-            <span class="example"><span class="r-en">Proposed architecture</span><span class="r-ko" lang="ko">제안 아키텍처</span></span>
+            <span class="example"><span class="r-en">Production Architecture</span><span class="r-ko" lang="ko">상용 아키텍처</span></span>
           </p>
         </div>
 
@@ -2091,7 +2103,7 @@
           </div>
           <p>
             <span class="r-en">Model Card</span><span class="r-ko" lang="ko">모델 카드</span><br/>
-            <strong style="color:var(--ink);font-weight:600">Converge Engine LTM v0.1</strong>
+            <strong style="color:var(--ink);font-weight:600">Converge Engine LTM v1.2.1</strong>
           </p>
         </div>
 
@@ -2203,13 +2215,13 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
               </div>
               <div>
                 <small><span class="r-en">Core technology</span><span class="r-ko" lang="ko">핵심 기술</span></small>
-                Converge Engine LTM v0.1
+                Converge Engine LTM v1.2.1
               </div>
             </div>
 
             <p class="fine" style="margin-top:30px">
-              <span class="r-en">Website: Official Release v1.1.3</span>
-              <span class="r-ko" lang="ko">공식 웹사이트: 정식 릴리스 v1.1.3</span><br/>
+              <span class="r-en">Website: Official Release v1.2.1</span>
+              <span class="r-ko" lang="ko">공식 웹사이트: 정식 릴리스 v1.2.1</span><br/>
               <span class="r-en">Contact: team@convergencyai.com / Seoul &amp; San Francisco</span>
               <span class="r-ko" lang="ko">문의처: team@convergencyai.com / 서울 &amp; 샌프란시스코</span>
             </p>
@@ -2255,8 +2267,8 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
         <span>Convergency.</span>
       </a>
       <span>
-        <span class="r-en">Learning Intelligence. AI x Education © 2026 Convergency Inc.</span>
-        <span class="r-ko" lang="ko">학습 지능. AI × 교육 © 2026 Convergency Inc. All rights reserved.</span>
+        <span class="r-en">Learning Intelligence. AI x Education © 2026 Convergency Inc. (v1.2.1)</span>
+        <span class="r-ko" lang="ko">학습 지능. AI × 교육 © 2026 Convergency Inc. All rights reserved. (v1.2.1)</span>
       </span>
       <div style="display:flex; align-items:center; gap:16px;">
         <button id="toggle-viewport-btn" type="button" class="btn small-btn" style="border-radius:6px; font-size:11px; padding:6px 12px; min-height:32px;">
@@ -2418,7 +2430,6 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
       }
 
       function executeCycle() {
-        // Phone 1: Typing text & updating state
         if (p1Msg && p1Coach && p1StateBox && p1Bar) {
           p1Coach.style.opacity = '0';
           p1Coach.style.transform = 'translateY(6px)';
@@ -2447,7 +2458,6 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
           });
         }
 
-        // Phone 2: Fingertip tap ripple & check
         if (wentBtn && p2Ripple && p2Explanation) {
           wentBtn.classList.remove('selected');
           const check = wentBtn.querySelector('b');
@@ -2476,7 +2486,6 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
           }, 1900);
         }
 
-        // Phone 3: Bar charts rising & rolling numbers
         if (p3Bars.length && p3SkillBar) {
           p3Bars.forEach(b => { b.style.height = '6%'; });
           p3SkillBar.style.width = '20%';
@@ -2581,7 +2590,7 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
 
         playOutput.textContent = JSON.stringify({
           status: "success",
-          engine: "Converge Engine LTM v0.1",
+          engine: "Converge Engine LTM v1.2.1",
           session_id: "sess_sim_092348",
           input_utterance: userQuery,
           stt_confidence: 0.982,
@@ -2663,7 +2672,6 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
       }
     }, { passive: true });
 
-    // IntersectionObserver for Graceful Scroll Reveal (v1.0.6: 0.75s, 28px slide)
     if ('IntersectionObserver' in window) {
       const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
