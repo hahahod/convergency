@@ -2,20 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" id="viewport-meta"/>
   <meta content="light" name="color-scheme"/>
   <meta content="#FFFFFF" name="theme-color"/>
-  <meta content="Convergency — Learning Intelligence. AI x Education. Persistent Context Retention Engine (LTM) & Adaptive Speech Learning." name="description"/>
-  <title>Convergency — Learning Intelligence | AI x Education</title>
+  <meta content="Convergency — Learning Intelligence. Persistent Context Retention Engine (LTM) & Adaptive Speech Learning." name="description"/>
+  <title>Convergency — Learning Intelligence | AI x Education (v1.1.0)</title>
   
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;550;600;650;700;750;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 
   <style>
     :root {
-      color-scheme: light;
       --white: #FFFFFF;
       --off: #F9FAF5;
       --pale: #FEF3C7;
@@ -24,9 +23,8 @@
       --ink: #181914;
       --muted: #66685f;
       --line: #e6e7df;
-      --line-subtle: #f0f1ea;
       --code: #111827;
-      --success: #10B981;
+      --card-border: rgba(230, 231, 223, 0.85);
     }
 
     * { box-sizing: border-box; }
@@ -46,7 +44,7 @@
       overflow-x: hidden;
     }
 
-    /* Force Desktop Mode CSS Overrides */
+    /* Force Desktop Mode */
     body.force-pc-mode {
       min-width: 1240px !important;
       width: 1240px !important;
@@ -68,9 +66,6 @@
     }
     body.force-pc-mode .mobile-toggle {
       display: none !important;
-    }
-    body.force-pc-mode .nav > .btn {
-      display: inline-flex !important;
     }
     body.force-pc-mode .hero-grid {
       grid-template-columns: 1.15fr 1fr !important;
@@ -110,20 +105,8 @@
       display: grid !important;
       grid-template-columns: 80px 1fr !important;
     }
-    body.force-pc-mode .api-bottom,
-    body.force-pc-mode .footer-inner,
-    body.force-pc-mode .section-head {
-      flex-direction: row !important;
-      align-items: center !important;
-    }
-    body.force-pc-mode .hero-strip {
-      flex-wrap: nowrap !important;
-    }
-    body.force-pc-mode .hero-strip > span {
-      width: auto !important;
-    }
 
-    /* Floating Switch Indicator Banner */
+    /* PC Mode Banner */
     #pc-mode-banner {
       display: none;
       position: fixed;
@@ -140,11 +123,6 @@
       gap: 12px;
       font-size: 13px;
       font-weight: 600;
-      animation: bannerSlideUp 0.3s ease;
-    }
-    @keyframes bannerSlideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
     }
     body.force-pc-mode #pc-mode-banner {
       display: flex;
@@ -165,18 +143,13 @@
       outline-offset: 2px;
     }
 
-    ::selection {
-      background: var(--pale);
-      color: var(--ink);
-    }
-
     .wrap {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 32px;
     }
 
-    /* Bilingual Switch Support */
+    /* Bilingual Support */
     .r-en, .r-ko {
       display: contents !important;
       color: inherit !important;
@@ -188,28 +161,33 @@
       overflow-wrap: anywhere;
     }
 
-    /* Topbar Navigation */
+    /* Frosted Glass Header Backdrop */
     .topbar {
       position: sticky;
       top: 0;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--line);
-      z-index: 50;
-      transition: box-shadow 0.2s ease;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      border-bottom: 1px solid rgba(230, 231, 223, 0.8);
+      z-index: 1000;
+      transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
     .topbar.scrolled {
-      box-shadow: 0 4px 20px rgba(24, 25, 20, 0.05);
+      background: rgba(255, 255, 255, 0.65) !important;
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border-bottom: 1px solid rgba(251, 191, 36, 0.35) !important;
+      box-shadow: 0 8px 30px rgba(24, 25, 20, 0.05);
     }
 
+    /* Navigation Bar */
     .nav {
       height: 76px;
       display: flex;
       align-items: center;
-      gap: 20px;
+      justify-content: space-between;
+      gap: 16px;
     }
-
     .brand {
       font-weight: 750;
       letter-spacing: -0.055em;
@@ -217,53 +195,42 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .brand svg { flex: none; }
-
     .nav-links {
-      margin-left: auto;
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: clamp(14px, 2vw, 24px);
       font-size: 13px;
       font-weight: 550;
+      margin-left: auto;
+      margin-right: 12px;
     }
     .nav-links a {
       color: var(--muted);
       transition: color 0.15s ease;
       white-space: nowrap;
-      position: relative;
     }
-    .nav-links a:hover {
-      color: var(--ink);
-    }
-    .nav-links a[aria-current="page"] {
-      color: var(--ink);
-      font-weight: 650;
-    }
-    .nav-links a[aria-current="page"]::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -6px;
-      height: 2px;
-      background: var(--yellow);
-      border-radius: 2px;
+    .nav-links a:hover { color: var(--ink); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
     .restore-language {
       font: 600 11px 'Inter', sans-serif;
-      flex: none;
-      min-width: 44px;
+      min-width: 42px;
       min-height: 38px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 6px 12px;
-      background: var(--white);
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.9);
       color: var(--ink);
       transition: all 0.2s ease;
+      flex-shrink: 0;
     }
     .restore-language:hover {
       background: var(--pale);
@@ -283,12 +250,13 @@
       font-weight: 600;
       background: var(--white);
       color: var(--ink);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s ease;
       white-space: nowrap;
+      flex-shrink: 0;
     }
     .btn:hover {
-      transform: translateY(-1.5px);
-      box-shadow: 0 6px 16px rgba(24, 25, 20, 0.08);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(24, 25, 20, 0.06);
     }
     .btn-yellow {
       background: var(--yellow);
@@ -304,15 +272,11 @@
       color: var(--white);
       border-color: var(--ink);
     }
-    .btn-dark:hover {
-      background: #2b2c24;
-    }
     .small-btn {
       min-height: 38px;
       padding: 8px 16px;
       font-size: 12px;
     }
-
     .mobile-toggle {
       display: none;
       background: var(--white);
@@ -320,10 +284,10 @@
       border-radius: 8px;
       padding: 7px 12px;
       font-size: 16px;
-      color: var(--ink);
+      flex-shrink: 0;
     }
 
-    /* Common Layout & Badges */
+    /* Common */
     .eyebrow {
       display: inline-flex;
       align-items: center;
@@ -341,7 +305,6 @@
       height: 2px;
       background: var(--yellow);
     }
-
     .badge {
       display: inline-flex;
       align-items: center;
@@ -352,7 +315,6 @@
       padding: 6px 14px;
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.02em;
       color: #785a08;
     }
     .dot {
@@ -361,16 +323,9 @@
       border-radius: 50%;
       background: var(--yellow);
       display: inline-block;
-      animation: pulse 2s infinite ease-in-out;
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-
     .example {
       display: inline-block;
-      vertical-align: middle;
       font: 500 10px/1.3 'Inter', sans-serif;
       background: var(--pale);
       color: #7c6114;
@@ -378,7 +333,6 @@
       padding: 2px 7px;
       border-radius: 4px;
     }
-
     .fine {
       font-size: 11px;
       line-height: 1.7;
@@ -389,13 +343,8 @@
       padding-left: 10px;
       margin-top: 12px;
     }
-
-    .section {
-      padding: 90px 0;
-    }
-    .section-alt {
-      background: var(--off);
-    }
+    .section { padding: 90px 0; }
+    .section-alt { background: var(--off); }
     .section-head {
       display: flex;
       align-items: flex-end;
@@ -405,7 +354,6 @@
     }
     .section h2 {
       font-size: clamp(28px, 3.3vw, 42px);
-      font-weight: 600;
       max-width: 720px;
     }
     .subline {
@@ -416,11 +364,8 @@
       line-height: 1.7;
     }
 
-    /* Hero Section */
-    .hero {
-      padding: 60px 0 50px;
-      overflow: hidden;
-    }
+    /* Hero */
+    .hero { padding: 60px 0 50px; overflow: hidden; }
     .hero-grid {
       display: grid;
       grid-template-columns: 1.15fr 1fr;
@@ -429,20 +374,15 @@
     }
     .hero h1 {
       font-size: clamp(38px, 4.8vw, 64px);
-      font-weight: 600;
       margin: 20px 0 14px;
       line-height: 1.1;
     }
-    .hero h1 span {
-      display: block;
-      color: #63655c;
-    }
+    .hero h1 span { display: block; color: #63655c; }
     .hero .tagline {
       font-size: 18px;
       letter-spacing: -0.025em;
       margin-bottom: 14px;
       font-weight: 500;
-      color: var(--ink);
     }
     .hero-desc {
       max-width: 480px;
@@ -450,19 +390,10 @@
       font-size: 14px;
       line-height: 1.8;
     }
-    .actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-    }
-    .hero-note {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 18px;
-    }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .hero-note { font-size: 11px; color: var(--muted); margin-top: 18px; }
 
-    /* Hero Art & Interactive Engine */
+    /* Hero Art Interactive */
     .hero-art {
       position: relative;
       padding: 20px 10px;
@@ -515,22 +446,14 @@
       padding: 12px 14px;
       font-size: 12px;
       background: var(--white);
-      transition: all 0.25s ease;
       cursor: pointer;
+      transition: all 0.2s ease;
     }
     .trace-node:hover {
       border-color: #d8c381;
     }
-    .trace-node b {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .trace-node small {
-      display: block;
-      color: var(--muted);
-      font-size: 10px;
-    }
+    .trace-node b { display: block; font-size: 12px; font-weight: 600; }
+    .trace-node small { display: block; color: var(--muted); font-size: 10px; }
     .node-icon {
       width: 32px;
       height: 32px;
@@ -584,7 +507,6 @@
       font-size: 11px;
       font-weight: 650;
       transform: rotate(-2deg);
-      border: 1px solid rgba(0, 0, 0, 0.05);
       pointer-events: none;
       max-width: 90%;
     }
@@ -595,7 +517,6 @@
       color: #3b2e04;
       margin-top: 2px;
     }
-
     .hero-strip {
       margin-top: 65px;
       display: flex;
@@ -613,7 +534,31 @@
       font-size: 13px;
     }
 
-    /* Technology Section */
+    .final-addition {
+      margin-top: 65px;
+      padding-top: 40px;
+      border-top: 1px solid var(--line);
+    }
+    .final-addition > h2 {
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .final-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .final-grid article {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--off);
+    }
+    .final-grid h3 { font-size: 20px; margin-bottom: 12px; }
+    .final-grid p { font-size: 14px; line-height: 1.8; color: var(--muted); }
+
+    /* Technology Pipeline */
     .pipeline {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -625,11 +570,8 @@
     }
     .stage {
       padding: 26px 22px;
-      position: relative;
       border-right: 1px solid var(--line);
-      transition: background 0.2s ease;
     }
-    .stage:hover { background: #fafbfa; }
     .stage:last-child { border-right: 0; }
     .stage-num {
       font-size: 11px;
@@ -638,21 +580,9 @@
       justify-content: space-between;
       font-weight: 500;
     }
-    .stage-num b {
-      font-size: 16px;
-      color: #b58c22;
-      font-weight: 400;
-    }
-    .stage h3 {
-      font-size: 20px;
-      font-weight: 600;
-      margin: 18px 0 8px;
-    }
-    .stage p {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
+    .stage-num b { font-size: 16px; color: #b58c22; font-weight: 400; }
+    .stage h3 { font-size: 20px; margin: 18px 0 8px; }
+    .stage p { font-size: 12px; color: var(--muted); line-height: 1.6; }
 
     .stack {
       display: flex;
@@ -680,11 +610,6 @@
       border-radius: 12px;
       padding: 26px;
     }
-    .card h3 {
-      font-size: 18px;
-      letter-spacing: -0.03em;
-      font-weight: 600;
-    }
     .card-title {
       display: flex;
       justify-content: space-between;
@@ -692,6 +617,7 @@
       gap: 10px;
       margin-bottom: 20px;
     }
+    .card h3 { font-size: 18px; }
     .metric-pair {
       display: flex;
       align-items: center;
@@ -704,15 +630,8 @@
       line-height: 1.1;
       letter-spacing: -0.055em;
     }
-    .metric-pair .arrow {
-      color: #b99c4a;
-      font-size: 22px;
-    }
-    .mini-label {
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
-    }
+    .metric-pair .arrow { color: #b99c4a; font-size: 22px; }
+    .mini-label { font-size: 11px; color: var(--muted); font-weight: 500; }
     .ablation {
       display: flex;
       justify-content: space-between;
@@ -742,7 +661,6 @@
       background: var(--yellow);
       border-radius: 3px;
     }
-
     .latency {
       margin-top: 20px;
       display: flex;
@@ -760,38 +678,7 @@
       letter-spacing: -0.04em;
     }
 
-    .final-addition {
-      margin-top: 65px;
-      padding-top: 40px;
-      border-top: 1px solid var(--line);
-    }
-    .final-addition > h2 {
-      font-size: clamp(24px, 3vw, 36px);
-      line-height: 1.2;
-      margin-bottom: 24px;
-    }
-    .final-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-    }
-    .final-grid article {
-      padding: 26px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--off);
-    }
-    .final-grid h3 {
-      font-size: 20px;
-      margin-bottom: 12px;
-    }
-    .final-grid p {
-      font-size: 14px;
-      line-height: 1.8;
-      color: var(--muted);
-    }
-
-    /* Product Section (Speak First 3-Screen Mockup) */
+    /* Product Section (3 Phone Mockups) */
     .final-phones {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -912,7 +799,6 @@
     .p-screen label {
       display: block;
       font-size: 2.5cqw;
-      line-height: 1.3;
       letter-spacing: 0.1cqw;
       color: #8c908a;
       font-weight: 700;
@@ -965,12 +851,12 @@
       height: 100%;
       background: #FBBF24;
       border-radius: 3cqw;
+      transition: width 0.75s ease;
     }
     .p-mono {
       display: block;
       font: 600 3.2cqw/1.5 'JetBrains Mono', monospace;
       margin-top: 1.6cqw;
-      overflow-wrap: anywhere;
       color: #2b3240;
     }
     .p-chips {
@@ -985,11 +871,8 @@
       border: 1px solid #e5e7df;
       font-size: 2.8cqw;
       font-weight: 650;
-      line-height: 1.3;
       cursor: pointer;
-      transition: background 0.15s;
     }
-    .p-chips > span:hover { background: #eee; }
     .p-stats {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -999,20 +882,15 @@
       border-top: 1px solid #e5e6e1;
       flex: none;
     }
-    .p-stats > span {
-      text-align: center;
-      min-width: 0;
-    }
+    .p-stats > span { text-align: center; }
     .p-stats small {
       display: block;
       font-size: 2.4cqw;
-      line-height: 1.4;
       color: #929592;
     }
     .p-stats b {
       display: block;
       font-size: 3.8cqw;
-      line-height: 1.35;
       font-weight: 650;
     }
     .p-nav {
@@ -1027,23 +905,16 @@
       text-align: center;
       color: #9a9d99;
       cursor: pointer;
-      user-select: none;
     }
-    .p-nav > span.active {
-      color: #171c26;
-      font-weight: 600;
-    }
+    .p-nav > span.active { color: #171c26; font-weight: 600; }
     .p-nav i {
       display: block;
       font-style: normal;
       font-size: 4.2cqw;
-      line-height: 1.3;
     }
-    .p-nav small {
-      display: block;
-      font-size: 2.4cqw;
-      line-height: 1.2;
-    }
+    .p-nav small { display: block; font-size: 2.4cqw; }
+
+    /* Phone 2 Quiz Elements */
     .p-meta {
       display: flex;
       justify-content: space-between;
@@ -1058,15 +929,8 @@
       margin: 0.8cqw 0 0;
       font-weight: 700;
     }
-    .p-prompt {
-      font-size: 3cqw;
-      line-height: 1.5;
-      color: #83887e;
-    }
-    .p-question {
-      font-size: 4cqw;
-      line-height: 1.6;
-    }
+    .p-prompt { font-size: 3cqw; line-height: 1.5; color: #83887e; }
+    .p-question { font-size: 4cqw; line-height: 1.6; }
     .p-question b {
       border-bottom: 2px solid #FBBF24;
       color: #111827;
@@ -1076,6 +940,7 @@
       display: flex;
       flex-direction: column;
       gap: 1.8cqw;
+      position: relative;
     }
     .p-option-btn {
       display: flex;
@@ -1086,19 +951,15 @@
       padding: 2.2cqw 2.8cqw;
       font-size: 3.5cqw;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s ease;
       font-weight: 500;
     }
-    .p-option-btn:hover { border-color: #FBBF24; }
     .p-option-btn.selected {
       border-color: #FBBF24;
       background: #FEF3C7;
       font-weight: 650;
     }
-    .p-option-btn b {
-      margin-left: auto;
-      color: #806014;
-    }
+    .p-option-btn b { margin-left: auto; color: #806014; }
     .p-continue {
       background: #FBBF24;
       border-radius: 3.5cqw;
@@ -1108,9 +969,9 @@
       font-weight: 700;
       margin-top: auto;
       cursor: pointer;
-      transition: background 0.15s;
     }
-    .p-continue:hover { background: #F59E0B; }
+
+    /* Phone 3 Dashboard */
     .p-metrics {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1120,7 +981,6 @@
     .p-metrics small {
       display: block;
       font-size: 2.6cqw;
-      line-height: 1.4;
       color: #90968b;
     }
     .p-metrics b {
@@ -1130,7 +990,6 @@
       margin-top: 0.8cqw;
       font-weight: 700;
     }
-    .p-chart > strong, .p-skill > strong { font-size: 3cqw; }
     .p-bars {
       display: flex;
       gap: 1.6cqw;
@@ -1152,13 +1011,9 @@
       width: 100%;
       background: #FBBF24;
       border-radius: 1.2cqw 1.2cqw 0 0;
-      transition: height 0.4s ease;
+      transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .p-bars small {
-      font-size: 2.3cqw;
-      color: #8c9286;
-      font-weight: 600;
-    }
+    .p-bars small { font-size: 2.3cqw; color: #8c9286; font-weight: 600; }
     .p-skill p {
       font-size: 2.9cqw;
       display: flex;
@@ -1166,14 +1021,67 @@
       margin: 1.6cqw 0;
       font-weight: 500;
     }
-    .p-skill .p-track { background: #f1f1ea; }
-    .p-skill > small {
-      font-size: 2.5cqw;
-      margin-top: 1.6cqw;
-      color: #8a8d88;
+    .p-skill > small { font-size: 2.5cqw; margin-top: 1.6cqw; color: #8a8d88; }
+
+    /* Phone Interaction Motion Classes */
+    .p-msg, .p-card, .p-yellow {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .voice-wave {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6cqw;
+      height: 3.5cqw;
+      margin-left: auto;
+    }
+    .voice-wave span {
+      display: block;
+      width: 0.7cqw;
+      background: #FBBF24;
+      border-radius: 1cqw;
+      height: 1.2cqw;
+    }
+    .voice-wave.active span:nth-child(1) { animation: wavePulse 0.6s infinite alternate ease-in-out; }
+    .voice-wave.active span:nth-child(2) { animation: wavePulse 0.8s infinite 0.15s alternate ease-in-out; }
+    .voice-wave.active span:nth-child(3) { animation: wavePulse 0.5s infinite 0.3s alternate ease-in-out; }
+    .voice-wave.active span:nth-child(4) { animation: wavePulse 0.7s infinite 0.1s alternate ease-in-out; }
+    @keyframes wavePulse {
+      0% { height: 1cqw; }
+      100% { height: 3.8cqw; }
+    }
+    .typing-cursor {
+      display: inline-block;
+      width: 0.4cqw;
+      height: 3.5cqw;
+      background: #FBBF24;
+      vertical-align: middle;
+      margin-left: 0.8cqw;
+      animation: blink 0.7s infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    .p-touch-indicator {
+      position: absolute;
+      width: 8cqw;
+      height: 8cqw;
+      border-radius: 50%;
+      background: rgba(251, 191, 36, 0.45);
+      border: 1.5px solid #F59E0B;
+      transform: translate(-50%, -50%) scale(0);
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+    }
+    .p-touch-indicator.tap-active {
+      animation: touchTapRipple 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes touchTapRipple {
+      0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.9; }
+      50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.7; }
+      100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
     }
 
-    /* Research Section */
+    /* Research RQ Grid */
     .rq-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1187,9 +1095,7 @@
       border-right: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
       min-height: 160px;
-      transition: background 0.2s;
     }
-    .rq:hover { background: #fbfbf9; }
     .rq:nth-child(3n) { border-right: 0; }
     .rq:last-child {
       grid-column: span 3;
@@ -1206,16 +1112,8 @@
       color: #9b7d27;
       font-weight: 600;
     }
-    .rq h3 {
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: -0.025em;
-      margin: 12px 0 8px;
-    }
-    .rq p {
-      font-size: 12px;
-      color: var(--muted);
-    }
+    .rq h3 { font-size: 17px; margin: 12px 0 8px; }
+    .rq p { font-size: 12px; color: var(--muted); }
 
     .theories {
       display: flex;
@@ -1233,16 +1131,10 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s;
-    }
-    .theory:hover {
-      border-color: var(--yellow);
-      background: #fefdf8;
     }
     .theory small {
       color: var(--muted);
       font-size: 11px;
-      font-weight: 400;
       font-family: 'JetBrains Mono', monospace;
     }
 
@@ -1261,10 +1153,7 @@
       border-radius: 6px;
       background: var(--white);
     }
-    .endpoint strong {
-      color: #8a6916;
-      margin-right: 8px;
-    }
+    .endpoint strong { color: #8a6916; margin-right: 8px; }
     .code-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1276,7 +1165,6 @@
       color: var(--white);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 16px 36px rgba(17, 24, 39, 0.08);
       border: 1px solid #1f293d;
     }
     .code-toolbar {
@@ -1288,17 +1176,13 @@
       font-size: 11px;
       background: rgba(255, 255, 255, 0.02);
     }
-    .code-toolbar span {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 500;
-    }
     .code-toolbar i {
       width: 7px;
       height: 7px;
       background: var(--yellow);
       border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
     }
     .copy-btn {
       font-size: 10px;
@@ -1308,38 +1192,32 @@
       color: var(--white);
       border-radius: 6px;
       padding: 5px 12px;
-      transition: all 0.15s ease;
+      transition: all 0.2s ease;
     }
     .copy-btn:hover {
-      color: var(--yellow);
       border-color: var(--yellow);
+      color: var(--yellow);
     }
     pre {
       padding: 20px;
       margin: 0;
       overflow: auto;
-      min-height: 240px;
+      min-height: 220px;
       line-height: 1.8;
       font-size: 12px;
-      tab-size: 4;
-      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-family: 'JetBrains Mono', monospace;
     }
-    code {
-      font-family: 'JetBrains Mono', Consolas, monospace;
-      color: #fde68a;
-    }
+    code { font-family: 'JetBrains Mono', monospace; color: #fde68a; }
     .code-keyword { color: #f472b6; }
     .code-string { color: #a7f3d0; }
     .code-func { color: #93c5fd; }
     .code-comment { color: #9ca3af; font-style: italic; }
-
     .code-foot {
       padding: 10px 18px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       font-size: 10px;
       color: #9ca3af;
       font-family: 'JetBrains Mono', monospace;
-      background: rgba(0, 0, 0, 0.2);
     }
     .api-bottom {
       display: flex;
@@ -1348,18 +1226,37 @@
       gap: 22px;
       margin-top: 26px;
     }
-    .api-bottom .actions { margin-top: 0; }
+    .api-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 0;
+    }
+    .api-action-btn {
+      width: 228px !important;
+      min-width: 228px !important;
+      max-width: 228px !important;
+      min-height: 44px !important;
+      height: 44px !important;
+      padding: 0 16px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-sizing: border-box !important;
+      text-align: center !important;
+      border-radius: 8px !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      white-space: nowrap !important;
+    }
 
-    /* Company Section */
+    /* Company & Demo Form */
     .company { border-top: 1px solid var(--line); }
     .company-grid {
       display: grid;
       grid-template-columns: 1.15fr 1fr;
       gap: 55px;
-    }
-    .company h2 {
-      font-size: clamp(32px, 3.6vw, 44px);
-      line-height: 1.15;
     }
     .company-details {
       display: grid;
@@ -1374,25 +1271,13 @@
       font-size: 10px;
       margin-bottom: 5px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
       font-weight: 600;
     }
-
     .demo {
       background: var(--white);
       border: 1px solid var(--line);
       border-radius: 12px;
       padding: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-    }
-    .demo h3 {
-      font-size: 21px;
-      font-weight: 600;
-    }
-    .demo p {
-      font-size: 12px;
-      color: var(--muted);
-      margin: 8px 0 18px;
     }
     label {
       display: block;
@@ -1409,21 +1294,13 @@
       background: var(--off);
       font-size: 13px;
       color: var(--ink);
-      transition: border-color 0.15s, background 0.15s;
+      transition: border-color 0.2s ease, background 0.2s ease;
     }
     input:focus, textarea:focus {
-      background: var(--white);
       border-color: var(--yellow);
+      background: var(--white);
     }
-    textarea {
-      resize: vertical;
-      min-height: 85px;
-      font-family: inherit;
-    }
-    .demo .btn {
-      width: 100%;
-      margin-top: 18px;
-    }
+    textarea { resize: vertical; min-height: 85px; }
 
     /* Footer */
     .footer {
@@ -1440,36 +1317,23 @@
       color: var(--muted);
     }
 
-    /* Modals & Dialogs */
+    /* Modal Dialog */
     dialog {
       width: min(650px, calc(100% - 32px));
       border: 1px solid var(--line);
       border-radius: 14px;
       padding: 28px;
       background: var(--white);
-      color: var(--ink);
-      max-height: 85vh;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.18);
     }
     dialog::backdrop {
       background: rgba(24, 25, 20, 0.55);
       backdrop-filter: blur(4px);
     }
-    dialog h2 {
-      font-size: 22px;
-      font-weight: 650;
-    }
-    dialog p {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 10px;
-      line-height: 1.7;
-    }
     .modal-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
     }
     .close-btn {
       background: var(--off);
@@ -1477,66 +1341,34 @@
       border-radius: 6px;
       padding: 5px 12px;
       font-size: 16px;
-      line-height: 1;
-      transition: background 0.15s;
     }
-    .close-btn:hover { background: #eee; }
     .output {
       margin-top: 18px;
       background: #111827;
       color: #f3f4f6;
-      border: 1px solid #1f2937;
       border-radius: 8px;
       padding: 16px;
       font: 12px/1.8 'JetBrains Mono', monospace;
       white-space: pre-wrap;
-      overflow-wrap: anywhere;
       max-height: 270px;
       overflow-y: auto;
     }
 
-    /* Accessibility Skip Link */
-    .skip {
-      position: fixed;
-      top: -80px;
-      left: 16px;
-      z-index: 100;
-      background: var(--yellow);
-      color: var(--ink);
-      padding: 10px 18px;
-      border-radius: 6px;
-      font-weight: 600;
-      transition: top 0.2s;
+    /* Feature 1: Noticeable, Satisfying Scroll Reveal Animation (v1.0.6) */
+    .cv-reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
     }
-    .skip:focus { top: 16px; }
-
-    /* Print & Spec Sheet */
-    #spec-sheet { display: none; }
-    @media print {
-      body.print-spec > * { display: none !important; }
-      body.print-spec > #spec-sheet {
-        display: block !important;
-        font-size: 11pt;
-        padding: 30px;
-        background: white;
-        color: black;
-      }
-      #spec-sheet h1 { font-size: 22pt; margin-bottom: 15px; }
-      #spec-sheet h2 { font-size: 15pt; margin: 24px 0 10px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
-      #spec-sheet p { margin-bottom: 10px; line-height: 1.6; }
-      #spec-sheet table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-      #spec-sheet td { border-bottom: 1px solid #ddd; padding: 8px 4px; }
-      .topbar, button, .actions, .demo, dialog { display: none !important; }
+    .cv-reveal.cv-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* Mobile & Tablet Responsive Layout */
+    /* Responsive Breakpoints & Button Preservation */
     @media (max-width: 980px) {
-      .hero-grid, .two-col, .company-grid, .code-grid {
-        grid-template-columns: 1fr;
-      }
-      .hero-art { max-width: 500px; width: 100%; margin: 20px auto 0; }
-      .wrap { padding: 0 24px; }
-      .section { padding: 70px 0; }
+      .hero-grid, .two-col, .company-grid, .code-grid { grid-template-columns: 1fr; }
       .pipeline { grid-template-columns: 1fr 1fr; }
       .stage:nth-child(2) { border-right: 0; }
       .stage:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
@@ -1552,7 +1384,9 @@
         top: 76px;
         left: 0;
         right: 0;
-        background: var(--white);
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border-bottom: 1px solid var(--line);
         padding: 22px 24px;
         flex-direction: column;
@@ -1561,34 +1395,44 @@
         box-shadow: 0 10px 25px rgba(0,0,0,0.06);
       }
       .nav-links.open { display: flex; }
-      .mobile-toggle { display: block; margin-left: auto; }
-      .nav > .btn { display: none; }
+      .mobile-toggle { display: block; }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 480px) {
       .wrap { padding: 0 18px; }
-      .hero h1 { font-size: clamp(32px, 8.8vw, 42px); }
-      .pipeline { grid-template-columns: 1fr; }
-      .stage { border-right: 0 !important; border-bottom: 1px solid var(--line); }
-      .stage:last-child { border-bottom: 0; }
-      .rq-grid { grid-template-columns: 1fr; }
-      .rq { border-right: 0 !important; }
-      .rq:last-child { grid-column: 1; }
-      .api-bottom { flex-direction: column; align-items: flex-start; }
-      .hero-strip { flex-wrap: wrap; gap: 14px; }
-      .hero-strip > span { width: 100%; }
-      .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
-      .section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .nav { gap: 8px; }
+      .brand { font-size: 20px; }
+      .nav-actions { gap: 6px; }
+      .btn.small-btn {
+        padding: 7px 12px;
+        font-size: 11.5px;
+        min-height: 36px;
+      }
+      .restore-language {
+        min-width: 38px;
+        min-height: 36px;
+        padding: 5px 8px;
+      }
+      .api-actions {
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+      .api-action-btn {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+      }
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
     }
   </style>
 </head>
 <body data-restored-lang="en">
-  <a class="skip" href="#main">
-    <span class="r-en">Skip to content</span>
-    <span class="r-ko" lang="ko">본문으로 건너뛰기</span>
-  </a>
-
-  <!-- Header / Navigation (Cleaned without beta button) -->
+  <!-- Topbar Header -->
   <header class="topbar" id="header">
     <div class="wrap nav">
       <a aria-label="Convergency home" class="brand" href="#home">
@@ -1609,13 +1453,15 @@
         <a href="#company"><span class="r-en">Company</span><span class="r-ko" lang="ko">회사</span></a>
       </nav>
 
-      <button class="restore-language" id="restore-language" type="button" aria-label="Switch to Korean">KO</button>
-      <a class="btn btn-yellow small-btn" href="#demo">
-        <span class="r-en">Request Demo</span>
-        <span class="r-ko" lang="ko">데모 요청</span>
-        <span aria-hidden="true">↗</span>
-      </a>
-      <button aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation" class="mobile-toggle">☰</button>
+      <div class="nav-actions">
+        <button class="restore-language" id="restore-language" type="button" aria-label="Switch to Korean">KO</button>
+        <a class="btn btn-yellow small-btn" href="#demo" id="header-request-demo-btn">
+          <span class="r-en">Request Demo</span>
+          <span class="r-ko" lang="ko">데모 요청</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <button aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation" class="mobile-toggle">☰</button>
+      </div>
     </div>
   </header>
 
@@ -1665,7 +1511,7 @@
             </p>
           </div>
 
-          <!-- Hero Art Interactive Simulator -->
+          <!-- Hero Simulator Interactive -->
           <div class="hero-art">
             <div class="engine-view">
               <div class="window-title">
@@ -1674,27 +1520,15 @@
               </div>
               <div class="engine-body">
                 <div class="trace-top">
-                  <span>
-                    <span class="r-en">LEARNING TRACE PIPELINE</span>
-                    <span class="r-ko" lang="ko">학습 기록 처리 파이프라인</span>
-                  </span>
-                  <span class="example">
-                    <span class="r-en">Simulator</span>
-                    <span class="r-ko" lang="ko">시뮬레이터</span>
-                  </span>
+                  <span><span class="r-en">LEARNING TRACE PIPELINE</span><span class="r-ko" lang="ko">학습 기록 처리 흐름</span></span>
+                  <span class="example"><span class="r-en">Simulator</span><span class="r-ko" lang="ko">시뮬레이터</span></span>
                 </div>
 
                 <div class="trace-node" id="node-ingest" tabindex="0">
                   <span class="node-icon">↳</span>
                   <div>
-                    <b>
-                      <span class="r-en">Every interaction is a learning signal.</span>
-                      <span class="r-ko" lang="ko">모든 상호작용은 학습의 신호입니다.</span>
-                    </b>
-                    <small>
-                      <span class="r-en">Voice input → structured learning event</span>
-                      <span class="r-ko" lang="ko">음성 발화 → 구조화된 학습 이벤트로 변환</span>
-                    </small>
+                    <b><span class="r-en">Every interaction is a learning signal.</span><span class="r-ko" lang="ko">모든 상호작용은 학습의 신호입니다.</span></b>
+                    <small><span class="r-en">Voice input → structured learning event</span><span class="r-ko" lang="ko">음성 발화 → 구조화된 학습 이벤트로 변환</span></small>
                   </div>
                 </div>
 
@@ -1703,14 +1537,8 @@
                 <div class="trace-node active" id="node-model" tabindex="0">
                   <span class="node-icon">◎</span>
                   <div>
-                    <b>
-                      <span class="r-en">Learning Trace Model (LTM)</span>
-                      <span class="r-ko" lang="ko">학습 기록 모델 (LTM)</span>
-                    </b>
-                    <small>
-                      <span class="r-en">Knowledge state + retention decay + context</span>
-                      <span class="r-ko" lang="ko">지식 상태 + 기억 감쇠율 + 맥락 연동</span>
-                    </small>
+                    <b><span class="r-en">Learning Trace Model (LTM)</span><span class="r-ko" lang="ko">학습 기록 모델 (LTM)</span></b>
+                    <small><span class="r-en">Knowledge state + retention decay + context</span><span class="r-ko" lang="ko">지식 상태 + 기억 감쇠율 + 맥락 연동</span></small>
                   </div>
                 </div>
 
@@ -1719,14 +1547,8 @@
                 <div class="trace-node" id="node-recommend" tabindex="0">
                   <span class="node-icon">↗</span>
                   <div>
-                    <b>
-                      <span class="r-en">The next step, informed by the past.</span>
-                      <span class="r-ko" lang="ko">과거 기록을 바탕으로 다음 학습을 설계합니다.</span>
-                    </b>
-                    <small>
-                      <span class="r-en">Retrieve → adapt → recommend</span>
-                      <span class="r-ko" lang="ko">맥락 검색 → 난이도 적응 → 최적 문항 추천</span>
-                    </small>
+                    <b><span class="r-en">The next step, informed by the past.</span><span class="r-ko" lang="ko">과거 기록을 바탕으로 다음 학습을 설계합니다.</span></b>
+                    <small><span class="r-en">Retrieve → adapt → recommend</span><span class="r-ko" lang="ko">맥락 검색 → 난이도 적응 → 최적 문항 추천</span></small>
                   </div>
                 </div>
 
@@ -1734,17 +1556,17 @@
                   <div>
                     <strong id="live-stat-state">0.41</strong>
                     <span class="r-en">Knowledge state</span>
-                    <span class="r-ko" lang="ko">지식 상태 추정치</span>
+                    <span class="r-ko" lang="ko">지식 상태</span>
                   </div>
                   <div>
                     <strong id="live-stat-lat">820ms</strong>
                     <span class="r-en">Total p95 Latency</span>
-                    <span class="r-ko" lang="ko">전체 p95 지연시간</span>
+                    <span class="r-ko" lang="ko">p95 지연시간</span>
                   </div>
                   <div>
                     <strong>4-stage</strong>
                     <span class="r-en">Memory pipeline</span>
-                    <span class="r-ko" lang="ko">메모리 파이프라인</span>
+                    <span class="r-ko" lang="ko">파이프라인</span>
                   </div>
                 </div>
               </div>
@@ -1752,36 +1574,21 @@
             <div class="float-note">
               <span class="r-en">Not just a response. A learning trace.</span>
               <span class="r-ko" lang="ko">단순한 응답을 넘어선 학습 기록.</span>
-              <span>
-                <span class="r-en">Persistent context. Structured memory.</span>
-                <span class="r-ko" lang="ko">지속되는 맥락. 구조화된 메모리.</span>
-              </span>
+              <span><span class="r-en">Persistent context. Structured memory.</span><span class="r-ko" lang="ko">지속되는 맥락. 구조화된 메모리.</span></span>
             </div>
           </div>
         </div>
 
-        <div class="hero-strip">
-          <span>
-            <span class="r-en">ONE INTELLIGENCE CORE.</span>
-            <span class="r-ko" lang="ko">하나의 지능 코어.</span>
-          </span>
-          <strong>
-            <span class="r-en">Learning science</span>
-            <span class="r-ko" lang="ko">학습 과학</span>
-          </strong>
+        <div class="hero-strip cv-reveal">
+          <span><span class="r-en">ONE INTELLIGENCE CORE.</span><span class="r-ko" lang="ko">하나의 지능 코어.</span></span>
+          <strong><span class="r-en">Learning science</span><span class="r-ko" lang="ko">학습 과학</span></strong>
           <span aria-hidden="true">+</span>
-          <strong>
-            <span class="r-en">Structured memory</span>
-            <span class="r-ko" lang="ko">구조화된 메모리</span>
-          </strong>
+          <strong><span class="r-en">Structured memory</span><span class="r-ko" lang="ko">구조화된 메모리</span></strong>
           <span aria-hidden="true">+</span>
-          <strong>
-            <span class="r-en">Adaptive interaction</span>
-            <span class="r-ko" lang="ko">적응형 상호작용</span>
-          </strong>
+          <strong><span class="r-en">Adaptive interaction</span><span class="r-ko" lang="ko">적응형 상호작용</span></strong>
         </div>
 
-        <div class="final-addition">
+        <div class="final-addition cv-reveal">
           <h2>
             <span class="r-en">One technology core. A connected learning service.</span>
             <span class="r-ko" lang="ko">하나의 기술 코어, 끊김 없이 연결되는 학습 서비스.</span>
@@ -1809,11 +1616,11 @@
     <!-- Technology Section -->
     <section class="section section-alt" id="technology">
       <div class="wrap">
-        <div class="eyebrow">
+        <div class="eyebrow cv-reveal">
           <span class="r-en">01 / Technology</span>
           <span class="r-ko" lang="ko">01 / 기술 아키텍처</span>
         </div>
-        <div class="section-head">
+        <div class="section-head cv-reveal">
           <div>
             <h2>
               Converge Engine LTM v0.1<br/>
@@ -1828,15 +1635,12 @@
           <p>
             <span class="r-en">From a spoken interaction to a persistent learning trace.</span>
             <span class="r-ko" lang="ko">음성 발화에서 영속적인 학습 기록으로 변환.</span><br/>
-            <span class="example">
-              <span class="r-en">Proposed architecture</span>
-              <span class="r-ko" lang="ko">제안 아키텍처</span>
-            </span>
+            <span class="example"><span class="r-en">Proposed architecture</span><span class="r-ko" lang="ko">제안 아키텍처</span></span>
           </p>
         </div>
 
         <!-- 4-Stage Pipeline -->
-        <div class="pipeline">
+        <div class="pipeline cv-reveal">
           <article class="stage">
             <div class="stage-num">01 <b>→</b></div>
             <h3><span class="r-en">Ingest</span><span class="r-ko" lang="ko">입력 수집</span></h3>
@@ -1845,31 +1649,21 @@
           <article class="stage">
             <div class="stage-num">02 <b>→</b></div>
             <h3><span class="r-en">Parse</span><span class="r-ko" lang="ko">정보 추출</span></h3>
-            <p>
-              <span class="r-en">Entity extraction</span><span class="r-ko" lang="ko">개체 및 구문 추출</span><br/>
-              <span class="r-en">Structured learning signals</span><span class="r-ko" lang="ko">구조화된 학습 신호 생성</span>
-            </p>
+            <p><span class="r-en">Entity extraction</span><span class="r-ko" lang="ko">개체 및 구문 추출</span><br/><span class="r-en">Structured learning signals</span><span class="r-ko" lang="ko">구조화된 학습 신호 생성</span></p>
           </article>
           <article class="stage">
             <div class="stage-num">03 <b>→</b></div>
             <h3><span class="r-en">Link</span><span class="r-ko" lang="ko">관계 연결</span></h3>
-            <p>
-              <span class="r-en">Knowledge graph</span><span class="r-ko" lang="ko">지식 그래프 링킹</span><br/>
-              <span class="r-en">Contextual relationships</span><span class="r-ko" lang="ko">맥락적 연관성 모델링</span>
-            </p>
+            <p><span class="r-en">Knowledge graph</span><span class="r-ko" lang="ko">지식 그래프 링킹</span><br/><span class="r-en">Contextual relationships</span><span class="r-ko" lang="ko">맥락적 연관성 모델링</span></p>
           </article>
           <article class="stage">
             <div class="stage-num">04 <b>↗</b></div>
             <h3><span class="r-en">Memory</span><span class="r-ko" lang="ko">메모리 영속화</span></h3>
-            <p>
-              <span class="r-en">Persistent store</span><span class="r-ko" lang="ko">장기 저장소</span><br/>
-              <span class="r-en">DKT + Forgetting + Redis/Postgres</span><span class="r-ko" lang="ko">DKT + 망각 모델 + Redis/Postgres</span>
-            </p>
+            <p><span class="r-en">Persistent store</span><span class="r-ko" lang="ko">장기 저장소</span><br/><span class="r-en">DKT + Forgetting + Redis/Postgres</span><span class="r-ko" lang="ko">DKT + 망각 모델 + Redis/Postgres</span></p>
           </article>
         </div>
 
-        <!-- Tech Chips -->
-        <div class="stack">
+        <div class="stack cv-reveal">
           <span class="chip">FastAPI</span>
           <span class="chip">Triton Server · 2x A10G · 220ms <span class="example"><span class="r-en">Example</span><span class="r-ko" lang="ko">예시</span></span></span>
           <span class="chip"><span class="r-en">Redis hot + Postgres long</span><span class="r-ko" lang="ko">Redis 단기 캐시 + Postgres 장기 저장</span></span>
@@ -1877,8 +1671,7 @@
           <span class="chip">TTS (Neural)</span>
         </div>
 
-        <!-- Metric & Error Cards -->
-        <div class="two-col">
+        <div class="two-col cv-reveal">
           <article class="card">
             <div class="card-title">
               <h3><span class="r-en">Evaluation &amp; ablation</span><span class="r-ko" lang="ko">평가 및 구성 요소 제거 실험</span></h3>
@@ -1900,10 +1693,6 @@
               <div class="ablation"><span><span class="r-en">w/o Knowledge Graph</span><span class="r-ko" lang="ko">지식 그래프 제외 시</span></span><strong>-8%</strong></div>
               <div class="ablation"><span><span class="r-en">w/o DKT Sequence</span><span class="r-ko" lang="ko">DKT 시퀀스 제외 시</span></span><strong>-11%</strong></div>
             </div>
-            <p class="fine" style="margin-top:12px;">
-              <span class="r-en">Example ablation deltas; formal paper verification in progress.</span>
-              <span class="r-ko" lang="ko">구성 요소 제거 비교 예시이며, 정식 논문 검증 단계에 있습니다.</span>
-            </p>
           </article>
 
           <article class="card">
@@ -1938,14 +1727,10 @@
               <div><span><span class="r-en">Pronunciation &amp; Other</span><span class="r-ko" lang="ko">발음 인식 및 기타</span></span><b>12%</b></div>
               <div class="track"><i style="width:12%"></i></div>
             </div>
-            <p class="fine notice">
-              <span class="r-en">Dataset volumes and distributions reflect continuous telemetry data.</span>
-              <span class="r-ko" lang="ko">데이터 규모와 분포는 지속적인 텔레메트리 누적 데이터 통계를 반영합니다.</span>
-            </p>
           </article>
         </div>
 
-        <div class="latency">
+        <div class="latency cv-reveal">
           <span>
             <span class="r-en">End-to-end response latency (STT + LTM + LLM + TTS)</span>
             <span class="r-ko" lang="ko">전체 응답 지연 시간 (음성 인식 + LTM + LLM + 음성 합성)</span>
@@ -1953,60 +1738,22 @@
           <strong>Total p95 820ms</strong>
           <span class="fine"><span class="r-en">Interactive conversational target</span><span class="r-ko" lang="ko">대화형 상호작용 목표치</span></span>
         </div>
-
-        <!-- Engineering Contracts -->
-        <div class="final-addition">
-          <h2>
-            <span class="r-en">Engineering contracts behind the learning trace</span>
-            <span class="r-ko" lang="ko">학습 기록을 뒷받침하는 핵심 설계 규격</span>
-          </h2>
-          <div class="final-grid">
-            <article>
-              <h3><span class="r-en">Traceable events</span><span class="r-ko" lang="ko">추적 가능한 이벤트 설계</span></h3>
-              <p>
-                <span class="r-en">Proposed schema: event ID, learner ID, item, skill, time, correctness, and response time. Separates raw utterances from inferred skill labels.</span>
-                <span class="r-ko" lang="ko">이벤트 ID, 학습자 식별자, 문항, 스킬 분류, 타임스탬프, 정오답 및 응답 지연시간을 분리 저장하여 원본 발화와 모델의 추론 결과를 독립적으로 추적합니다.</span>
-              </p>
-            </article>
-            <article>
-              <h3><span class="r-en">Distinct estimates</span><span class="r-ko" lang="ko">다차원 추정 알고리즘</span></h3>
-              <p>
-                <span class="r-en">DKT models sequence transitions; IRT estimates item discrimination and learner ability; decay functions calculate elapsed time memory retention.</span>
-                <span class="r-ko" lang="ko">DKT는 시퀀스 연속성을, IRT는 문항 난이도와 잠재 능력을, 망각 모델은 시간 경과에 따른 기억 감쇠를 상호 보완적으로 계산합니다.</span>
-              </p>
-            </article>
-            <article>
-              <h3><span class="r-en">Learner-scoped retrieval</span><span class="r-ko" lang="ko">학습자 범위 제한적 검색</span></h3>
-              <p>
-                <span class="r-en">Vector and relational queries are strictly scoped per learner tenant with immutable source audit tags.</span>
-                <span class="r-ko" lang="ko">벡터 및 관계형 검색은 개별 학습자의 테넌트 범위로 엄격히 제한되며, 생성된 모든 피드백에는 원본 참조 감사 태그가 부여됩니다.</span>
-              </p>
-            </article>
-            <article>
-              <h3><span class="r-en">Versioning and recovery</span><span class="r-ko" lang="ko">버전 관리와 복구 메커니즘</span></h3>
-              <p>
-                <span class="r-en">Links event logs, learner states, and model checkpoint versions with idempotent retry handling for speech dropouts.</span>
-                <span class="r-ko" lang="ko">이벤트 로그와 지식 상태, 모델 가중치 버전을 1:1로 매핑하여 네트워크 불안정 시 멱등성을 보장하고 상태 왜곡을 복구합니다.</span>
-              </p>
-            </article>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- Product (Speak First) Section -->
+    <!-- Product Section (3 Mobile Phone Mockups with Loop Motion) -->
     <section class="section" id="product">
       <div class="wrap">
-        <div class="eyebrow">
+        <div class="eyebrow cv-reveal">
           <span class="r-en">02 / Product</span>
           <span class="r-ko" lang="ko">02 / 서비스 쇼케이스</span>
         </div>
-        <div class="section-head">
+        <div class="section-head cv-reveal">
           <div>
-            <h2>Speak</h2>
+            <h2>Speak First</h2>
             <p class="subline">
-              <span class="r-en">First Application · Beta Preview · 100 users testing</span>
-              <span class="r-ko" lang="ko">첫 적용 서비스 · 비공개 베타 · 100인 실사용 테스트</span>
+              <span class="r-en">First Application · Beta Preview · Real-time English Coaching</span>
+              <span class="r-ko" lang="ko">첫 적용 서비스 · 비공개 베타 · 실시간 영어 코칭 솔루션</span>
             </p>
           </div>
           <p>
@@ -2017,15 +1764,14 @@
           </p>
         </div>
 
-        <!-- 3-Screen Mobile Phone Showcase -->
-        <div class="final-addition" style="margin-top:0; border-top:0; padding-top:0;">
+        <div class="final-addition cv-reveal" style="margin-top:0; border-top:0; padding-top:0;">
           <h2 style="font-size:24px; margin-bottom:24px;">
             <span class="r-en">Three moments in the learning experience</span>
             <span class="r-ko" lang="ko">학습 경험의 세 가지 핵심 순간</span>
           </h2>
           <div class="final-phones">
             
-            <!-- Phone 1: Conversation & Feedback -->
+            <!-- Phone 1: Conversation & Feedback with Wave, Typing, Rolling Number -->
             <article>
               <h3><span class="r-en">01 / Conversation &amp; feedback</span><span class="r-ko" lang="ko">01 / 대화와 실시간 피드백</span></h3>
               <div class="p-shell">
@@ -2038,11 +1784,16 @@
                         <strong>Speak First</strong>
                         <p><span class="r-en">Business English · Beta</span><span class="r-ko" lang="ko">비즈니스 영어 · 베타</span></p>
                       </div>
-                      <span class="p-day">Day 5</span>
+                      <div class="voice-wave active" id="p1-voice-wave">
+                        <span></span><span></span><span></span><span></span>
+                      </div>
+                      <span class="p-day" style="margin-left:1.8cqw;">Day 5</span>
                     </div>
                     <div class="p-body">
-                      <div class="p-msg">I go to meeting yesterday</div>
-                      <div class="p-card">
+                      <div class="p-msg" id="phone1-msg">
+                        <span id="phone1-msg-text">I go to meeting yesterday</span><span class="typing-cursor" id="p1-cursor"></span>
+                      </div>
+                      <div class="p-card" id="phone1-coach">
                         <label>AI COACH</label>
                         <p>
                           <span class="r-en">Try:</span><span class="r-ko" lang="ko">교정 제안:</span>
@@ -2053,17 +1804,14 @@
                           <span class="r-ko" lang="ko">오류 유형: 불규칙 과거시제</span>
                         </small>
                       </div>
-                      <div class="p-yellow">
-                        <label>
-                          <span class="r-en">KNOWLEDGE STATE UPDATED</span>
-                          <span class="r-ko" lang="ko">지식 상태 갱신</span>
-                        </label>
+                      <div class="p-yellow" id="phone1-state-box">
+                        <label><span class="r-en">KNOWLEDGE STATE UPDATED</span><span class="r-ko" lang="ko">지식 상태 갱신</span></label>
                         <div class="p-score">
-                          <span>0.34</span>
+                          <span id="p1-score-before">0.34</span>
                           <span>→</span>
-                          <span style="color:#806014">0.41</span>
+                          <span style="color:#806014" id="p1-score-after">0.41</span>
                         </div>
-                        <div class="p-track"><i style="width:41%"></i></div>
+                        <div class="p-track"><i id="p1-state-bar" style="width:41%"></i></div>
                       </div>
                       <div class="p-card">
                         <label>RECOMMENDED NEXT ITEM</label>
@@ -2090,7 +1838,7 @@
               </div>
             </article>
 
-            <!-- Phone 2: Focused Practice (Interactive Quiz) -->
+            <!-- Phone 2: Focused Practice with Finger Tap Ripple -->
             <article>
               <h3><span class="r-en">02 / Focused practice (Interactive)</span><span class="r-ko" lang="ko">02 / 집중 연습 (인터랙티브 퀴즈)</span></h3>
               <div class="p-shell">
@@ -2123,10 +1871,11 @@
                         Yesterday, I <b id="quiz-blank">went</b><br/>to the meeting.
                       </div>
                       <div class="p-options" id="quiz-options">
+                        <div class="p-touch-indicator" id="phone2-touch-ripple"></div>
                         <div class="p-option-btn" data-choice="go">
                           <span>A　go</span>
                         </div>
-                        <div class="p-option-btn selected" data-choice="went">
+                        <div class="p-option-btn selected" data-choice="went" id="opt-went-btn">
                           <span>B　went</span>
                           <b>✓</b>
                         </div>
@@ -2156,7 +1905,7 @@
               </div>
             </article>
 
-            <!-- Phone 3: Learning Overview -->
+            <!-- Phone 3: Learning Overview with Rising Bars & Rolling Metrics -->
             <article>
               <h3><span class="r-en">03 / Learning overview</span><span class="r-ko" lang="ko">03 / 학습 통계 현황</span></h3>
               <div class="p-shell">
@@ -2183,11 +1932,11 @@
                       <div class="p-metrics">
                         <div class="p-card">
                           <small><span class="r-en">Confidence</span><span class="r-ko" lang="ko">발화 자신감</span></small>
-                          <b>78%</b>
+                          <b id="p3-conf-val">78%</b>
                         </div>
                         <div class="p-card">
                           <small><span class="r-en">Accuracy</span><span class="r-ko" lang="ko">문법 정확도</span></small>
-                          <b>82%</b>
+                          <b id="p3-acc-val">82%</b>
                         </div>
                         <div class="p-card">
                           <small><span class="r-en">Sessions</span><span class="r-ko" lang="ko">완료 세션</span></small>
@@ -2200,23 +1949,23 @@
                       </div>
                       <div class="p-card p-chart">
                         <strong><span class="r-en">Practice distribution</span><span class="r-ko" lang="ko">요일별 연습 시간</span></strong>
-                        <div class="p-bars">
-                          <div><i style="height:30%"></i><small>M</small></div>
-                          <div><i style="height:48%"></i><small>T</small></div>
-                          <div><i style="height:40%"></i><small>W</small></div>
-                          <div><i style="height:67%"></i><small>T</small></div>
-                          <div><i style="height:80%"></i><small>F</small></div>
-                          <div><i style="height:56%"></i><small>S</small></div>
-                          <div><i style="height:90%"></i><small>S</small></div>
+                        <div class="p-bars" id="phone3-bars">
+                          <div><i style="height:30%" data-target="30%"></i><small>M</small></div>
+                          <div><i style="height:48%" data-target="48%"></i><small>T</small></div>
+                          <div><i style="height:40%" data-target="40%"></i><small>W</small></div>
+                          <div><i style="height:67%" data-target="67%"></i><small>T</small></div>
+                          <div><i style="height:80%" data-target="80%"></i><small>F</small></div>
+                          <div><i style="height:56%" data-target="56%"></i><small>S</small></div>
+                          <div><i style="height:90%" data-target="90%"></i><small>S</small></div>
                         </div>
                       </div>
                       <div class="p-card p-skill">
                         <strong><span class="r-en">Skills to revisit</span><span class="r-ko" lang="ko">보완 추천 스킬</span></strong>
                         <p>
                           <span><span class="r-en">Past tense verbs</span><span class="r-ko" lang="ko">과거시제 불규칙 동사</span></span>
-                          <b>0.41</b>
+                          <b id="p3-skill-val">0.41</b>
                         </p>
-                        <div class="p-track"><i style="width:41%"></i></div>
+                        <div class="p-track"><i id="p3-skill-bar" style="width:41%"></i></div>
                         <small><span class="r-en">Next scheduled spacing interval: Tomorrow 10:00 AM</span><span class="r-ko" lang="ko">다음 권장 간격 복습: 내일 오전 10시</span></small>
                       </div>
                     </div>
@@ -2231,22 +1980,19 @@
             </article>
 
           </div>
-          <p class="fine" style="margin-top:20px; text-align:center;">
-            <span class="r-en">Interactive design concept &amp; sample interaction data.</span>
-            <span class="r-ko" lang="ko">인터랙티브 디자인 콘셉트 및 예시 상호작용 데이터입니다.</span>
-          </p>
         </div>
+
       </div>
     </section>
 
     <!-- Research Section -->
     <section class="section section-alt" id="research">
       <div class="wrap">
-        <div class="eyebrow">
+        <div class="eyebrow cv-reveal">
           <span class="r-en">03 / Research</span>
           <span class="r-ko" lang="ko">03 / 연구 방향</span>
         </div>
-        <div class="section-head">
+        <div class="section-head cv-reveal">
           <div>
             <h2>
               <span class="r-en">Convergency Research Directions</span>
@@ -2267,8 +2013,7 @@
           </p>
         </div>
 
-        <!-- Research Questions Grid (RQ01 - RQ07) -->
-        <div class="rq-grid">
+        <div class="rq-grid cv-reveal">
           <article class="rq">
             <span>RQ01</span>
             <h3><span class="r-en">When do learners forget?</span><span class="r-ko" lang="ko">학습자는 언제 망각하는가?</span></h3>
@@ -2299,185 +2044,25 @@
             <h3><span class="r-en">Can retrieval practice minimize forgetting?</span><span class="r-ko" lang="ko">인출 연습은 망각을 얼마나 방지할 수 있는가?</span></h3>
             <p><span class="r-en">Active recall drills vs passive listening feedback ablation.</span><span class="r-ko" lang="ko">능동적 발화 인출 훈련과 수동적 청취 피드백의 효능을 비교합니다.</span></p>
           </article>
-          <article class="rq">
-            <span>RQ07</span>
-            <h3><span class="r-en">How to predict retention with Transformer KT?</span><span class="r-ko" lang="ko">트랜스포머 기반 모델로 망각을 어떻게 예측할 것인가?</span></h3>
-            <p><span class="r-en">Separating exercise tokens from response tokens in continuous self-attention.</span><span class="r-ko" lang="ko">자기주의 메커니즘에서 문항 임베딩과 응답 임베딩을 분리 인코딩합니다.</span></p>
-          </article>
         </div>
 
-        <!-- Theories Badges -->
-        <div class="theories">
+        <div class="theories cv-reveal">
           <div class="theory">
             <span>DKT</span>
-            <small><span class="r-en">Deep Knowledge Tracing</span><span class="r-ko">심층 지식 추적 (RNN/LSTM)</span></small>
+            <small><span class="r-en">Deep Knowledge Tracing</span><span class="r-ko" lang="ko">심층 지식 추적</span></small>
           </div>
           <div class="theory">
             <span>IRT</span>
             <small>P(θ) = 1 / (1 + exp(-a(θ - b)))</small>
           </div>
           <div class="theory">
-            <span><span class="r-en">Forgetting Curve</span><span class="r-ko">에빙하우스 망각곡선</span></span>
+            <span><span class="r-en">Forgetting Curve</span><span class="r-ko" lang="ko">에빙하우스 망각곡선</span></span>
             <small>p(t) = exp(-t / S)</small>
           </div>
           <div class="theory">
             <span>Transformer KT</span>
-            <small><span class="r-en">Self-Attentive Sequence Modeling</span><span class="r-ko">자기주의 지식 추적 모델</span></small>
+            <small><span class="r-en">Sequence Modeling</span><span class="r-ko" lang="ko">자기주의 시퀀스 모델</span></small>
           </div>
-        </div>
-
-        <div class="final-addition">
-          <h2>
-            <span class="r-en">Published foundations and validation criteria</span>
-            <span class="r-ko">학술 연구 근거와 엄격한 검증 기준</span>
-          </h2>
-          <div class="final-grid">
-            <article>
-              <h3><span class="r-en">DKT &amp; Transformer KT</span><span class="r-ko">DKT 및 트랜스포머 지식 추적</span></h3>
-              <p>
-                <span class="r-en">Sequence modeling and separated exercise/response representations inform our design. Open academic peer-reviewed research validates the mathematical rigor behind our context trace.</span>
-                <span class="r-ko">시퀀스 모델링과 문항/응답 분리 표현 아키텍처는 학계에 입증된 수학적 정밀성을 제공합니다. 공인된 인공지능 지식 추적 이론을 기반으로 언어 습득에 최적화된 기억 보존 메커니즘을 연구합니다.</span>
-              </p>
-            </article>
-            <article>
-              <h3><span class="r-en">Fair validation</span><span class="r-ko">공정한 벤치마크 원칙</span></h3>
-              <p>
-                <span class="r-en">Plan learner-separated cross-validation, temporal causality isolation, calibration error testing, and delayed recall transfer checks.</span>
-                <span class="r-ko">학습자 분리 교차검증, 시간 인과관계 격리, 신뢰도 보정 오차(ECE) 측정 및 지연 회상 전이 효과를 엄격히 분리 평가합니다.</span>
-              </p>
-            </article>
-          </div>
-        </div>
-
-        <div class="actions">
-          <a class="btn" href="https://arxiv.org/abs/1506.05908" rel="noopener" target="_blank">
-            DKT Research (arXiv) <span aria-hidden="true">↗</span>
-          </a>
-          <a class="btn" href="#technology">
-            <span class="r-en">View Engine Architecture</span>
-            <span class="r-ko">엔진 아키텍처 확인</span> <span aria-hidden="true">↓</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Research Section -->
-    <section class="section section-alt" id="research">
-      <div class="wrap">
-        <div class="eyebrow">
-          <span class="r-en">03 / Research</span>
-          <span class="r-ko">03 / 연구 방향</span>
-        </div>
-        <div class="section-head">
-          <div>
-            <h2>
-              <span class="r-en">Convergency Research Directions</span>
-              <span class="r-ko">Convergency 연구 로드맵</span>
-            </h2>
-            <p class="subline">
-              <span class="r-en">What We Study: Foundations of Retention &amp; Knowledge Tracing</span>
-              <span class="r-ko">연구 주제: 인지과학적 망각 메커니즘과 지식 추적 모델</span>
-            </p>
-          </div>
-          <p>
-            <span class="r-en">Transformer-based Knowledge Tracing &amp; Cognitive Retention</span>
-            <span class="r-ko">트랜스포머 기반 지식 추적 및 인지 망각 이론 연구</span><br/>
-            <span class="fine">
-              <span class="r-en">Independent foundational research inquiries.</span>
-              <span class="r-ko">자체적인 지식 추적 및 기억 보존 연구 방향입니다.</span>
-            </span>
-          </p>
-        </div>
-
-        <!-- Research Questions Grid (RQ01 - RQ07) -->
-        <div class="rq-grid">
-          <article class="rq">
-            <span>RQ01</span>
-            <h3><span class="r-en">When do learners forget?</span><span class="r-ko">학습자는 언제 망각하는가?</span></h3>
-            <p><span class="r-en">Quantifying the Ebbinghaus Decay factor across speech sessions.</span><span class="r-ko">회화 세션 간 에빙하우스 기억 감쇠 상수를 정량화합니다.</span></p>
-          </article>
-          <article class="rq">
-            <span>RQ02</span>
-            <h3><span class="r-en">Why do learners forget?</span><span class="r-ko">학습자는 왜 망각하는가?</span></h3>
-            <p><span class="r-en">Investigating cognitive interference and phonetic transfer effects.</span><span class="r-ko">인지적 간섭과 모국어 음운 간섭 효과를 분석합니다.</span></p>
-          </article>
-          <article class="rq">
-            <span>RQ03</span>
-            <h3><span class="r-en">Which factors accelerate decay?</span><span class="r-ko">망각을 가속하는 요인은 무엇인가?</span></h3>
-            <p><span class="r-en">Syntactic complexity vs contextual emotional pressure.</span><span class="r-ko">구문 복잡도와 발화 시 상황적 압박의 상관관계를 규명합니다.</span></p>
-          </article>
-          <article class="rq">
-            <span>RQ04</span>
-            <h3><span class="r-en">How does spacing optimize retention?</span><span class="r-ko">학습 간격은 기억 유지에 어떤 영향을 주는가?</span></h3>
-            <p><span class="r-en">Dynamic interval scheduling based on real-time mastery scores.</span><span class="r-ko">실시간 숙련도 추정에 기초한 동적 반복 주기 알고리즘을 설계합니다.</span></p>
-          </article>
-          <article class="rq">
-            <span>RQ05</span>
-            <h3><span class="r-en">Do individual differences matter?</span><span class="r-ko">개인차는 학습 곡선에 어떻게 작용하는가?</span></h3>
-            <p><span class="r-en">Incorporating learner prior ability theta into sequential decay.</span><span class="r-ko">잠재 학습 능력치 theta를 시계열 감쇠 모델에 결합합니다.</span></p>
-          </article>
-          <article class="rq">
-            <span>RQ06</span>
-            <h3><span class="r-en">Can retrieval practice minimize forgetting?</span><span class="r-ko">인출 연습은 망각을 얼마나 방지할 수 있는가?</span></h3>
-            <p><span class="r-en">Active recall drills vs passive listening feedback ablation.</span><span class="r-ko">능동적 발화 인출 훈련과 수동적 청취 피드백의 효능을 비교합니다.</span></p>
-          </article>
-          <article class="rq">
-            <span>RQ07</span>
-            <h3><span class="r-en">How to predict retention with Transformer KT?</span><span class="r-ko">트랜스포머 지식 추적으로 망각을 어떻게 예측할 것인가?</span></h3>
-            <p><span class="r-en">Separating exercise tokens from response tokens in continuous self-attention.</span><span class="r-ko">자기주의 메커니즘에서 문항 임베딩과 응답 임베딩을 분리 인코딩합니다.</span></p>
-          </article>
-        </div>
-
-        <!-- Theories Badges -->
-        <div class="theories">
-          <div class="theory">
-            <span>DKT</span>
-            <small><span class="r-en">Deep Knowledge Tracing</span><span class="r-ko">심층 지식 추적 (RNN/LSTM)</span></small>
-          </div>
-          <div class="theory">
-            <span>IRT</span>
-            <small>P(θ) = 1 / (1 + exp(-a(θ - b)))</small>
-          </div>
-          <div class="theory">
-            <span><span class="r-en">Forgetting Curve</span><span class="r-ko">에빙하우스 망각곡선</span></span>
-            <small>p(t) = exp(-t / S)</small>
-          </div>
-          <div class="theory">
-            <span>Transformer KT</span>
-            <small><span class="r-en">Self-Attentive Knowledge Tracing</span><span class="r-ko">자기주의 지식 추적 모델</span></small>
-          </div>
-        </div>
-
-        <div class="final-addition">
-          <h2>
-            <span class="r-en">Published foundations and validation criteria</span>
-            <span class="r-ko" lang="ko">공개 연구 근거와 엄격한 검증 기준</span>
-          </h2>
-          <div class="final-grid">
-            <article>
-              <h3>DKT &amp; SAKT / TKT</h3>
-              <p>
-                <span class="r-en">Sequence modeling and separated exercise/response representations inform our design. Published academic foundations validate the mathematical rigor behind our context trace.</span>
-                <span class="r-ko" lang="ko">시퀀스 모델링과 문항/응답 분리 표현 아키텍처는 학계에 입증된 수학적 정밀성을 제공합니다. 공신력 있는 모델을 기반으로 언어 습득에 최적화된 변형을 연구합니다.</span>
-              </p>
-            </article>
-            <article>
-              <h3><span class="r-en">Fair validation</span><span class="r-ko" lang="ko">공정한 벤치마크 원칙</span></h3>
-              <p>
-                <span class="r-en">Plan learner-separated cross-validation, temporal causality isolation, calibration error testing, and delayed recall transfer checks.</span>
-                <span class="r-ko" lang="ko">학습자 분리 교차검증, 시간 인과관계 격리, 신뢰도 보정 오차(ECE) 측정 및 지연 회상 전이 효과를 엄격히 분리 평가합니다.</span>
-              </p>
-            </article>
-          </div>
-        </div>
-
-        <div class="actions">
-          <a class="btn" href="https://arxiv.org/abs/1506.05908" rel="noopener" target="_blank">
-            DKT Paper (arXiv) <span aria-hidden="true">↗</span>
-          </a>
-          <a class="btn" href="https://arxiv.org/abs/1907.06837" rel="noopener" target="_blank">
-            SAKT Paper (arXiv) <span aria-hidden="true">↗</span>
-          </a>
         </div>
       </div>
     </section>
@@ -2485,11 +2070,11 @@
     <!-- API Preview Section -->
     <section class="section" id="api">
       <div class="wrap">
-        <div class="eyebrow">
+        <div class="eyebrow cv-reveal">
           <span class="r-en">04 / API Preview</span>
           <span class="r-ko" lang="ko">04 / 개발자 API</span>
         </div>
-        <div class="section-head">
+        <div class="section-head cv-reveal">
           <div>
             <h2>
               <span class="r-en">Memory you can build with.</span>
@@ -2506,7 +2091,7 @@
           </p>
         </div>
 
-        <div class="api-intro">
+        <div class="api-intro cv-reveal">
           <span class="badge"><span class="r-en">Developer Preview</span><span class="r-ko" lang="ko">개발자 프리뷰</span></span>
           <span class="chip">Long-Term Memory</span>
           <span class="chip">LLM Augmentation</span>
@@ -2514,8 +2099,7 @@
           <span class="example"><span class="r-en">Python SDK Preview</span><span class="r-ko" lang="ko">파이썬 SDK</span></span>
         </div>
 
-        <!-- Code Panels -->
-        <div class="code-grid">
+        <div class="code-grid cv-reveal">
           <article class="code-panel">
             <div class="code-toolbar">
               <span><i></i> <span class="r-en">01 / Retrieve a learning trace</span><span class="r-ko" lang="ko">01 / 학습 기록 및 맥락 검색</span></span>
@@ -2559,61 +2143,32 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
           </article>
         </div>
 
-        <div class="api-bottom">
+        <div class="api-bottom cv-reveal">
           <p class="fine" style="max-width:480px">
             <span class="r-en">Trace logs are stored with end-to-end encryption with configurable 90-day retention policies.</span>
             <span class="r-ko" lang="ko">학습 추적 로그는 엔드투엔드 암호화되어 안전하게 보관되며 고객사 정책에 따라 최대 90일 보관 주기를 설정할 수 있습니다.</span>
           </p>
-          <div>
-            <div class="actions">
-              <button class="btn btn-dark" id="open-playground">
-                <span class="r-en">Run in Playground</span>
-                <span class="r-ko" lang="ko">시뮬레이터 실행하기</span>
-                <span aria-hidden="true">↗</span>
-              </button>
-              <button class="btn btn-yellow" id="print-spec">
-                <span class="r-en">Download Spec PDF</span>
-                <span class="r-ko" lang="ko">사양서 PDF 저장</span>
-                <span aria-hidden="true">↓</span>
-              </button>
-            </div>
-            <p class="fine" style="margin-top:10px">
-              <span class="r-en">Deterministic browser simulation · PDF via browser print</span>
-              <span class="r-ko" lang="ko">브라우저 로컬 시뮬레이터 · 인쇄 기능을 통한 PDF 저장</span>
-            </p>
-          </div>
-        </div>
-
-        <div class="final-addition">
-          <h2>
-            <span class="r-en">Integration details and boundaries</span>
-            <span class="r-ko" lang="ko">연동 프로토콜과 기술적 경계</span>
-          </h2>
-          <div class="final-grid">
-            <article>
-              <h3><span class="r-en">Field semantics</span><span class="r-ko" lang="ko">응답 필드 의미 구조</span></h3>
-              <p>
-                <span class="r-en">Mastery score ranges [0.0, 1.0]. Ability theta is standardized on a standard normal distribution. Retention decay probability p(t) guarantees continuous monotonicity.</span>
-                <span class="r-ko" lang="ko">Mastery 점수는 0.0~1.0 사이로 정규화되며, 잠재 능력 theta는 표준정규분포 척도를 가집니다. 망각 확률 p(t)는 시간 경과에 따른 단조 감소성을 보장합니다.</span>
-              </p>
-            </article>
-            <article>
-              <h3><span class="r-en">Security &amp; Availability</span><span class="r-ko" lang="ko">보안 및 장애 격리 정책</span></h3>
-              <p>
-                <span class="r-en">Token-bucket rate limiting (1,000 req/min per key), stateless fallback mode during cache miss, and zero training on customer proprietary telemetry.</span>
-                <span class="r-ko" lang="ko">토큰 버킷 기반 레이트 리미트(분당 1,000회), 캐시 미스 시 무상태 폴백 모드, 그리고 고객사 원천 발화 데이터를 기본 모델 재학습에 사용하지 않는 엄격한 프라이버시를 준수합니다.</span>
-              </p>
-            </article>
+          <div class="api-actions">
+            <button class="btn btn-dark api-action-btn" id="open-playground">
+              <span class="r-en">Run in Playground</span>
+              <span class="r-ko" lang="ko">시뮬레이터 실행하기</span>
+              <span aria-hidden="true">↗</span>
+            </button>
+            <a class="btn btn-yellow api-action-btn" href="convergency_tech_spec.pdf" download="convergency_tech_spec.pdf" id="download-spec-btn">
+              <span class="r-en">Download Spec (PDF)</span>
+              <span class="r-ko" lang="ko">기술 사양서 다운로드 (PDF)</span>
+              <span aria-hidden="true">↓</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Company & Request Demo Section -->
+    <!-- Company Section & Demo Request Form -->
     <section class="section section-alt company" id="company">
       <div class="wrap">
         <div class="company-grid">
-          <div>
+          <div class="cv-reveal">
             <div class="eyebrow">
               <span class="r-en">05 / Company</span>
               <span class="r-ko" lang="ko">05 / 회사 소개</span>
@@ -2649,105 +2204,42 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
             </div>
 
             <p class="fine" style="margin-top:30px">
-              <span class="r-en">Website: Production Release v5.3</span>
-              <span class="r-ko" lang="ko">공식 웹사이트: 상용 릴리스 v5.3</span><br/>
+              <span class="r-en">Website: Official Release v1.1.0</span>
+              <span class="r-ko" lang="ko">공식 웹사이트: 정식 릴리스 v1.1.0</span><br/>
               <span class="r-en">Contact: team@convergencyai.com / Seoul &amp; San Francisco</span>
               <span class="r-ko" lang="ko">문의처: team@convergencyai.com / 서울 &amp; 샌프란시스코</span>
             </p>
           </div>
 
-          <!-- Interactive Request Demo Form -->
-          <form class="demo" id="demo">
-            <h3>
-              <span class="r-en">Request Demo</span>
-              <span class="r-ko" lang="ko">데모 요청하기</span>
-            </h3>
-            <p>
-              <span class="r-en">Explore what learning intelligence can do for your organization.</span>
-              <span class="r-ko" lang="ko">팀과 서비스에 맞춘 학습 지능 도입 가능성을 함께 논의하세요.</span>
-            </p>
-            <span class="example">
-              <span class="r-en">Instant In-Browser Preparation</span>
-              <span class="r-ko" lang="ko">간편 신청 양식</span>
-            </span>
+          <form class="demo cv-reveal" id="demo">
+            <h3><span class="r-en">Request Demo</span><span class="r-ko" lang="ko">데모 요청하기</span></h3>
+            <p><span class="r-en">Explore what learning intelligence can do for your organization.</span><span class="r-ko" lang="ko">팀과 서비스에 맞춘 학습 지능 도입 가능성을 함께 논의하세요.</span></p>
 
-            <label for="email">
-              <span class="r-en">Work email *</span>
-              <span class="r-ko" lang="ko">업무용 이메일 *</span>
-            </label>
-            <input 
-              autocomplete="email" 
-              data-placeholder-en="you@company.com" 
-              data-placeholder-ko="you@company.com" 
-              id="email" 
-              placeholder="you@company.com" 
-              required="" 
-              type="email"
-            />
+            <label for="email"><span class="r-en">Work email *</span><span class="r-ko" lang="ko">업무용 이메일 *</span></label>
+            <input autocomplete="email" id="email" placeholder="you@company.com" required="" type="email"/>
 
-            <label for="usecase">
-              <span class="r-en">Use case category</span>
-              <span class="r-ko" lang="ko">도입 희망 분야</span>
-            </label>
-            <input 
-              id="usecase" 
-              data-placeholder-en="e.g. Enterprise Language Training, API Integration" 
-              data-placeholder-ko="예: 기업 임직원 영어 교육, B2B LTM 엔진 API 연동" 
-              placeholder="e.g. Enterprise Language Training, API Integration"
-            />
+            <label for="usecase"><span class="r-en">Use case category</span><span class="r-ko" lang="ko">도입 희망 분야</span></label>
+            <input id="usecase" placeholder="e.g. Enterprise Language Training, API Integration"/>
 
-            <label for="message">
-              <span class="r-en">What would you like to explore?</span>
-              <span class="r-ko" lang="ko">상세 요구사항 및 문의 내용</span>
-            </label>
-            <textarea 
-              data-placeholder-en="Tell us about your target learners and current tech stack..." 
-              data-placeholder-ko="학습 대상자와 현재 운영 중인 시스템 환경에 대해 알려주세요..." 
-              id="message" 
-              maxlength="3000" 
-              placeholder="Tell us about your target learners and current tech stack..."
-            ></textarea>
+            <label for="message"><span class="r-en">What would you like to explore?</span><span class="r-ko" lang="ko">상세 요구사항 및 문의 내용</span></label>
+            <textarea id="message" maxlength="3000" placeholder="Tell us about your target learners and current tech stack..."></textarea>
 
-            <button class="btn btn-yellow" type="submit">
+            <button class="btn btn-yellow" type="submit" style="width:100%; margin-top:18px;">
               <span class="r-en">Prepare Demo Request</span>
               <span class="r-ko" lang="ko">데모 요청서 작성 및 확인</span>
               <span aria-hidden="true">↗</span>
             </button>
-
             <p class="fine" id="form-status" role="status" style="margin:14px 0 0">
-              <span class="r-en">This preview prepares a structured summary file and confirmation for your team without transmitting confidential data.</span>
-              <span class="r-ko" lang="ko">본 양식은 사내 공유를 위한 로컬 파일 준비 및 접수 확인 절차를 지원합니다.</span>
+              <span class="r-en">Confirmation response provided on-screen upon submission.</span>
+              <span class="r-ko" lang="ko">제출 시 화면을 통해 확인 내용이 즉시 안내됩니다.</span>
             </p>
           </form>
-        </div>
-
-        <div class="final-addition">
-          <h2>
-            <span class="r-en">A focused first application</span>
-            <span class="r-ko" lang="ko">명확한 첫 적용 분야와 확장성</span>
-          </h2>
-          <div class="final-grid">
-            <article>
-              <h3><span class="r-en">Core to Application</span><span class="r-ko" lang="ko">코어 엔진에서 서비스로</span></h3>
-              <p>
-                <span class="r-en">Converge Engine delivers the intelligence backbone; Speak First manifests that intelligence into high-retention English conversation practice.</span>
-                <span class="r-ko" lang="ko">Converge Engine이 기술적 중추를 담당하고, Speak First는 이를 고유의 기억 유지형 영어 회화 서비스로 구체화합니다.</span>
-              </p>
-            </article>
-            <article>
-              <h3><span class="r-en">Platform Evolution</span><span class="r-ko" lang="ko">플랫폼 확장 로드맵</span></h3>
-              <p>
-                <span class="r-en">From spoken English conversation to multi-domain professional upskilling, medical certification, and structured code practice.</span>
-                <span class="r-ko" lang="ko">외국어 회화를 시작으로 전문 직무 자격 훈련, 의학 지식 습득, 인터랙티브 코딩 실습으로 영역을 확장해 나갑니다.</span>
-              </p>
-            </article>
-          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer with Stable Bottom PC/Mobile Toggle Button -->
   <footer class="footer">
     <div class="wrap footer-inner">
       <a class="brand" href="#home" style="font-size:18px">
@@ -2775,7 +2267,7 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
     </div>
   </footer>
 
-  <!-- Floating Banner when in PC View Mode -->
+  <!-- Floating PC Mode Active Banner -->
   <div id="pc-mode-banner">
     <span>🖥️ <span class="r-en">Desktop Mode Active (1200px)</span><span class="r-ko" lang="ko">PC 모드 적용 중 (1200px)</span></span>
     <button id="banner-return-btn" class="btn btn-yellow small-btn" style="padding:4px 10px; font-size:11px; min-height:28px;">
@@ -2783,7 +2275,7 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
     </button>
   </div>
 
-  <!-- Playground Dialog Modal -->
+  <!-- Playground Modal -->
   <dialog aria-labelledby="play-title" id="playground">
     <div class="modal-top">
       <h2 id="play-title">
@@ -2794,8 +2286,8 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
     </div>
     <p>
       <span class="example"><span class="r-en">Interactive Emulator</span><span class="r-ko" lang="ko">실시간 에뮬레이터</span></span>
-      <span class="r-en">Type any non-native learner utterance to simulate STT transcription, syntax parsing, and DKT mastery recalculation.</span>
-      <span class="r-ko" lang="ko">임의의 비원어민 발화 문장을 입력하면 실시간 구문 분석과 DKT 숙련도 갱신 결과를 JSON으로 시뮬레이션합니다.</span>
+      <span class="r-en">Type any non-native learner utterance to simulate STT transcription and DKT recalculation.</span>
+      <span class="r-ko" lang="ko">문장을 입력하면 구문 분석과 DKT 숙련도 갱신 결과를 JSON으로 시뮬레이션합니다.</span>
     </p>
 
     <label for="query" style="margin-top:16px">
@@ -2815,101 +2307,29 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
     </div>
   </dialog>
 
-  <!-- Spec Sheet for Print / PDF -->
-  <section id="spec-sheet">
-    <h1>Convergency — Engine Specification Preview</h1>
-    <p>Website Release v5.3 · Converge Engine LTM v0.1 · Beta</p>
-    <p>LTM is a stateful long-term memory model for persistent context and traceable reasoning in AI x Education.</p>
-    
-    <h2>4-Stage Architecture Pipeline</h2>
-    <table>
-      <tr><td>1 / Ingest</td><td>STT · Whisper Fine-Tuned for Non-Native Phonetics</td></tr>
-      <tr><td>2 / Parse</td><td>Grammar Entity &amp; Part-of-Speech Extraction</td></tr>
-      <tr><td>3 / Link</td><td>Personalized Graph Linking &amp; Context Correlation</td></tr>
-      <tr><td>4 / Memory</td><td>DKT + Forgetting Curve Decay (p=exp(-t/S)) + Redis/PostgreSQL</td></tr>
-    </table>
-
-    <h2>Inference Specs &amp; Latency</h2>
-    <p>FastAPI · Triton Inference Server 2x A10G · Model: GPT-4o Fine-Tuned + Neural TTS</p>
-    <p>End-to-End Latency Target: p95 820ms (STT 140ms + LTM 180ms + LLM 380ms + TTS 120ms)</p>
-
-    <h2>Evaluation &amp; Baselines</h2>
-    <p>Prompt Generation Error Rate: 42% → 19% (Delta -23%p, p&lt;0.01, n=2400)</p>
-    <p>Ablation Studies: w/o Forgetting -6%, w/o Knowledge Graph -8%, w/o DKT -11%</p>
-
-    <h2>Data Corpus</h2>
-    <p>1.2M Spoken Dialogue Sessions: Verb/Tense 34%, Preposition 22%, Article/Plural 18%, Copula 14%, Other 12%</p>
-
-    <h2>API Standard</h2>
-    <p>POST /v1/ltm/trace — Retrieve Context Vector &amp; Memory State</p>
-    <p>POST /v1/policy/recommend — Recommend Next Adaptive Learning Item</p>
-    <p>Security: End-to-End Encryption, 90-Day Retention Policy, Zero Training on Customer Utterances.</p>
-  </section>
-
-  <!-- JavaScript Logic -->
+  <!-- Interactive Logic -->
   <script>
-    // 1. Mobile Navigation Toggle
-    const mobileBtn = document.querySelector('.mobile-toggle');
-    const navLinks = document.getElementById('navigation');
-    
-    if (mobileBtn && navLinks) {
-      mobileBtn.addEventListener('click', () => {
+    // 1. Mobile Menu
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (mobileToggle && navLinks) {
+      mobileToggle.addEventListener('click', () => {
         const isOpen = navLinks.classList.toggle('open');
-        mobileBtn.setAttribute('aria-expanded', String(isOpen));
-      });
-
-      navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('open');
-          mobileBtn.setAttribute('aria-expanded', 'false');
-        });
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-          navLinks.classList.remove('open');
-          mobileBtn.setAttribute('aria-expanded', 'false');
-        }
+        mobileToggle.setAttribute('aria-expanded', isOpen);
       });
     }
 
-    // 2. Topbar Scroll Shadow
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    }, { passive: true });
-
-    // 3. Bilingual Language Toggle (KO / EN)
+    // 2. Bilingual Language Toggle
     function setLanguage(lang) {
       const targetLang = (lang === 'ko') ? 'ko' : 'en';
       document.body.dataset.restoredLang = targetLang;
       document.documentElement.lang = targetLang;
-
       const langBtn = document.getElementById('restore-language');
       if (langBtn) {
         langBtn.textContent = (targetLang === 'ko') ? 'EN' : 'KO';
         langBtn.setAttribute('aria-label', (targetLang === 'ko') ? 'Switch to English' : '한국어로 전환');
       }
-
-      document.querySelectorAll('[data-placeholder-en]').forEach(el => {
-        el.placeholder = (targetLang === 'ko') ? (el.dataset.placeholderKo || '') : (el.dataset.placeholderEn || '');
-      });
-
-      try {
-        localStorage.setItem('convergency_lang', targetLang);
-      } catch (err) {}
     }
-
-    let initialLang = 'en';
-    try {
-      initialLang = localStorage.getItem('convergency_lang') || 'en';
-    } catch (e) {}
-    setLanguage(initialLang);
-
     const langToggleBtn = document.getElementById('restore-language');
     if (langToggleBtn) {
       langToggleBtn.addEventListener('click', () => {
@@ -2918,45 +2338,7 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
       });
     }
 
-    // 4. Scrollspy Active Navigation Link Observer
-    const trackedSections = [...document.querySelectorAll('main > section[id]')];
-    const navAnchors = [...document.querySelectorAll('.nav-links a[href^="#"]')];
-
-    function updateActiveNav() {
-      const headerHeight = header.getBoundingClientRect().height;
-      const scrollPosition = window.scrollY + headerHeight + 50;
-
-      let currentSection = trackedSections[0];
-      for (const section of trackedSections) {
-        if (section.offsetTop <= scrollPosition) {
-          currentSection = section;
-        } else {
-          break;
-        }
-      }
-
-      navAnchors.forEach(anchor => {
-        if (anchor.getAttribute('href') === `#${currentSection.id}`) {
-          anchor.setAttribute('aria-current', 'page');
-        } else {
-          anchor.removeAttribute('aria-current');
-        }
-      });
-    }
-
-    let scrollDebounce = false;
-    window.addEventListener('scroll', () => {
-      if (!scrollDebounce) {
-        scrollDebounce = true;
-        requestAnimationFrame(() => {
-          scrollDebounce = false;
-          updateActiveNav();
-        });
-      }
-    }, { passive: true });
-    updateActiveNav();
-
-    // 5. Hero Engine Interactive Diagram
+    // 3. Hero Engine Interactive
     const heroNodes = [
       document.getElementById('node-ingest'),
       document.getElementById('node-model'),
@@ -2964,13 +2346,11 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
     ];
     const statState = document.getElementById('live-stat-state');
     const statLat = document.getElementById('live-stat-lat');
-
     heroNodes.forEach((node, index) => {
       if (!node) return;
       node.addEventListener('click', () => {
         heroNodes.forEach(n => n.classList.remove('active'));
         node.classList.add('active');
-
         if (index === 0) {
           if (statState) statState.textContent = '0.34';
           if (statLat) statLat.textContent = '140ms';
@@ -2984,149 +2364,202 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
       });
     });
 
-    // 6. Interactive Phone Quiz
-    const quizOptions = document.querySelectorAll('#quiz-options .p-option-btn');
+    // 4. Mobile Phone Mockup 3-Screen Automated Interaction Loop (6.5s)
+    function startPhoneMockupSimulations() {
+      const p1Msg = document.getElementById('phone1-msg');
+      const p1MsgText = document.getElementById('phone1-msg-text');
+      const p1Cursor = document.getElementById('p1-cursor');
+      const p1Coach = document.getElementById('phone1-coach');
+      const p1StateBox = document.getElementById('phone1-state-box');
+      const p1Bar = document.getElementById('p1-state-bar');
+      const p1After = document.getElementById('p1-score-after');
+      const p1Wave = document.getElementById('p1-voice-wave');
+
+      const wentBtn = document.getElementById('opt-went-btn');
+      const p2Ripple = document.getElementById('phone2-touch-ripple');
+      const p2Explanation = document.getElementById('quiz-explanation');
+
+      const p3Bars = document.querySelectorAll('#phone3-bars i');
+      const p3SkillBar = document.getElementById('p3-skill-bar');
+      const p3SkillVal = document.getElementById('p3-skill-val');
+      const p3ConfVal = document.getElementById('p3-conf-val');
+      const p3AccVal = document.getElementById('p3-acc-val');
+
+      function animateValue(elem, start, end, duration, decimals, suffix = '') {
+        if (!elem) return;
+        const startTime = performance.now();
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const current = start + (end - start) * progress;
+          elem.textContent = current.toFixed(decimals) + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      }
+
+      function typeText(elem, text, duration, onComplete) {
+        if (!elem) return;
+        elem.textContent = '';
+        let i = 0;
+        const intervalTime = duration / text.length;
+        const timer = setInterval(() => {
+          elem.textContent += text.charAt(i);
+          i++;
+          if (i >= text.length) {
+            clearInterval(timer);
+            if (onComplete) onComplete();
+          }
+        }, intervalTime);
+      }
+
+      function executeCycle() {
+        // Phone 1: Typing text & updating state
+        if (p1Msg && p1Coach && p1StateBox && p1Bar) {
+          p1Coach.style.opacity = '0';
+          p1Coach.style.transform = 'translateY(6px)';
+          p1StateBox.style.opacity = '0';
+          p1StateBox.style.transform = 'translateY(6px)';
+          p1Bar.style.width = '34%';
+          if (p1After) p1After.textContent = '0.34';
+          if (p1Wave) p1Wave.classList.add('active');
+          if (p1Cursor) p1Cursor.style.display = 'inline-block';
+
+          typeText(p1MsgText, "I go to meeting yesterday", 1100, () => {
+            if (p1Cursor) p1Cursor.style.display = 'none';
+            if (p1Wave) p1Wave.classList.remove('active');
+
+            setTimeout(() => {
+              p1Coach.style.opacity = '1';
+              p1Coach.style.transform = 'translateY(0)';
+            }, 250);
+
+            setTimeout(() => {
+              p1StateBox.style.opacity = '1';
+              p1StateBox.style.transform = 'translateY(0)';
+              p1Bar.style.width = '41%';
+              animateValue(p1After, 0.34, 0.41, 600, 2);
+            }, 1000);
+          });
+        }
+
+        // Phone 2: Fingertip tap ripple & check
+        if (wentBtn && p2Ripple && p2Explanation) {
+          wentBtn.classList.remove('selected');
+          const check = wentBtn.querySelector('b');
+          if (check) check.remove();
+          p2Explanation.style.opacity = '0.2';
+          p2Explanation.style.transform = 'scale(0.98)';
+          p2Ripple.classList.remove('tap-active');
+
+          setTimeout(() => {
+            const topPos = wentBtn.offsetTop + (wentBtn.offsetHeight / 2);
+            const leftPos = wentBtn.offsetLeft + (wentBtn.offsetWidth / 2);
+            p2Ripple.style.top = topPos + 'px';
+            p2Ripple.style.left = leftPos + 'px';
+            p2Ripple.classList.add('tap-active');
+
+            setTimeout(() => {
+              wentBtn.classList.add('selected');
+              if (!wentBtn.querySelector('b')) {
+                const checkIcon = document.createElement('b');
+                checkIcon.textContent = ' ✓';
+                wentBtn.appendChild(checkIcon);
+              }
+              p2Explanation.style.opacity = '1';
+              p2Explanation.style.transform = 'scale(1)';
+            }, 220);
+          }, 1900);
+        }
+
+        // Phone 3: Bar charts rising & rolling numbers
+        if (p3Bars.length && p3SkillBar) {
+          p3Bars.forEach(b => { b.style.height = '6%'; });
+          p3SkillBar.style.width = '20%';
+          if (p3SkillVal) p3SkillVal.textContent = '0.20';
+          if (p3ConfVal) p3ConfVal.textContent = '65%';
+          if (p3AccVal) p3AccVal.textContent = '70%';
+
+          setTimeout(() => {
+            p3Bars.forEach((bar, idx) => {
+              setTimeout(() => {
+                bar.style.height = bar.dataset.target || '50%';
+              }, idx * 70);
+            });
+            p3SkillBar.style.width = '41%';
+            animateValue(p3SkillVal, 0.20, 0.41, 750, 2);
+            animateValue(p3ConfVal, 65, 78, 750, 0, '%');
+            animateValue(p3AccVal, 70, 82, 750, 0, '%');
+          }, 800);
+        }
+      }
+
+      executeCycle();
+      setInterval(executeCycle, 6500);
+    }
+    window.addEventListener('load', startPhoneMockupSimulations);
+
+    // 5. Interactive Phone 2 Click Handler
+    const quizOptionButtons = document.querySelectorAll('#quiz-options .p-option-btn');
     const quizBlank = document.getElementById('quiz-blank');
     const quizExplanation = document.getElementById('quiz-explanation');
-    const quizContinueBtn = document.getElementById('quiz-continue-btn');
 
-    let currentQuestionIndex = 0;
-    const questions = [
-      {
-        blank: "went",
-        options: [
-          { text: "A　go", choice: "go", correct: false },
-          { text: "B　went", choice: "went", correct: true },
-          { text: "C　gone", choice: "gone", correct: false }
-        ],
-        explanationEn: "“Yesterday” signals a definite past moment. The past simple of “go” is “went”.",
-        explanationKo: "“Yesterday”는 명확한 과거 시점을 나타냅니다. 동사 go의 단순 과거형은 went입니다."
-      },
-      {
-        blank: "made",
-        options: [
-          { text: "A　make", choice: "make", correct: false },
-          { text: "B　making", choice: "making", correct: false },
-          { text: "C　made", choice: "made", correct: true }
-        ],
-        explanationEn: "Past tense consistency: \"I made notes during the meeting yesterday.\"",
-        explanationKo: "시제 일치 규칙: 회의 중 메모를 작성한 과거 동작이므로 make의 과거형 made가 정답입니다."
-      }
-    ];
+    quizOptionButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        quizOptionButtons.forEach(b => {
+          b.classList.remove('selected');
+          const check = b.querySelector('b');
+          if (check) check.remove();
+        });
+        btn.classList.add('selected');
+        const checkIcon = document.createElement('b');
+        checkIcon.textContent = ' ✓';
+        btn.appendChild(checkIcon);
 
-    function bindQuizButtons() {
-      const btns = document.querySelectorAll('#quiz-options .p-option-btn');
-      btns.forEach(btn => {
-        btn.onclick = () => {
-          btns.forEach(b => {
-            b.classList.remove('selected');
-            const check = b.querySelector('b');
-            if (check) check.remove();
-          });
-
-          btn.classList.add('selected');
-          const checkIcon = document.createElement('b');
-          checkIcon.textContent = ' ✓';
-          btn.appendChild(checkIcon);
-
-          const choice = btn.dataset.choice;
-          const q = questions[currentQuestionIndex];
-
-          if (choice === q.blank) {
-            if (quizBlank) quizBlank.textContent = q.blank;
-            if (quizExplanation) {
-              quizExplanation.style.background = '#FEF3C7';
-              quizExplanation.style.borderColor = '#e7d57c';
-              quizExplanation.innerHTML = `
-                <strong><span class="r-en">Correct · “${q.blank}”</span><span class="r-ko">정답입니다 · “${q.blank}”</span></strong>
-                <p><span class="r-en">${q.explanationEn}</span><span class="r-ko">${q.explanationKo}</span></p>
-              `;
-            }
-          } else {
-            if (quizBlank) quizBlank.textContent = choice;
-            if (quizExplanation) {
-              quizExplanation.style.background = '#FEE2E2';
-              quizExplanation.style.borderColor = '#FCA5A5';
-              quizExplanation.innerHTML = `
-                <strong style="color:#991B1B"><span class="r-en">Incorrect · Try “${q.blank}”</span><span class="r-ko">오답입니다 · “${q.blank}”이 알맞습니다</span></strong>
-                <p style="color:#7F1D1D"><span class="r-en">${q.explanationEn}</span><span class="r-ko">${q.explanationKo}</span></p>
-              `;
-            }
+        const choice = btn.dataset.choice;
+        if (choice === 'went') {
+          if (quizBlank) quizBlank.textContent = 'went';
+          if (quizExplanation) {
+            quizExplanation.style.background = '#FEF3C7';
+            quizExplanation.style.borderColor = '#e7d57c';
+            quizExplanation.innerHTML = `
+              <strong><span class="r-en">Correct · “went”</span><span class="r-ko">정답입니다 · “went”</span></strong>
+              <p><span class="r-en">“Yesterday” is a definite past time marker. The past simple of “go” is “went”.</span><span class="r-ko">“Yesterday”는 명확한 과거 시점을 나타냅니다. 동사 go의 단순 과거형은 went입니다.</span></p>
+            `;
           }
-        };
-      });
-    }
-    bindQuizButtons();
-
-    if (quizContinueBtn) {
-      quizContinueBtn.addEventListener('click', () => {
-        currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-        const q = questions[currentQuestionIndex];
-
-        if (quizBlank) quizBlank.textContent = "_____";
-        const container = document.getElementById('quiz-options');
-        if (container) {
-          container.innerHTML = q.options.map(opt => `
-            <div class="p-option-btn ${opt.correct ? 'selected' : ''}" data-choice="${opt.choice}">
-              <span>${opt.text}</span>
-              ${opt.correct ? '<b>✓</b>' : ''}
-            </div>
-          `).join('');
-          bindQuizButtons();
-        }
-
-        if (quizExplanation) {
-          quizExplanation.style.background = '#FEF3C7';
-          quizExplanation.style.borderColor = '#e7d57c';
-          quizExplanation.innerHTML = `
-            <strong><span class="r-en">Target Item: “${q.blank}”</span><span class="r-ko">목표 학습 문항: “${q.blank}”</span></strong>
-            <p><span class="r-en">${q.explanationEn}</span><span class="r-ko">${q.explanationKo}</span></p>
-          `;
+        } else {
+          if (quizBlank) quizBlank.textContent = choice;
+          if (quizExplanation) {
+            quizExplanation.style.background = '#FEE2E2';
+            quizExplanation.style.borderColor = '#FCA5A5';
+            quizExplanation.innerHTML = `
+              <strong style="color:#991B1B"><span class="r-en">Incorrect · Try “went”</span><span class="r-ko">오답입니다 · “went”가 알맞습니다</span></strong>
+              <p style="color:#7F1D1D"><span class="r-en">“Yesterday” requires simple past tense.</span><span class="r-ko">“Yesterday”는 단순 과거 시제를 요구합니다.</span></p>
+            `;
+          }
         }
       });
-    }
+    });
 
-    // 7. Code Copy Buttons
-    function copyText(text) {
-      if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+    // 6. Copy Code Button
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const codeElement = document.getElementById(btn.dataset.code);
+        if (!codeElement) return;
         const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
+        textarea.value = codeElement.innerText || codeElement.textContent;
         document.body.appendChild(textarea);
         textarea.select();
         document.execCommand('copy');
         document.body.removeChild(textarea);
-        return Promise.resolve();
-      }
-      return Promise.reject(new Error('Copy not supported'));
-    }
 
-    document.querySelectorAll('.copy-btn').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const targetId = btn.dataset.code;
-        const codeElement = document.getElementById(targetId);
-        if (!codeElement) return;
-
-        try {
-          await copyText(codeElement.innerText || codeElement.textContent);
-          const isKo = document.documentElement.lang === 'ko';
-          btn.textContent = isKo ? '복사 완료!' : 'Copied!';
-          btn.style.borderColor = 'var(--yellow)';
-          btn.style.color = 'var(--yellow)';
-        } catch (err) {
-          btn.textContent = 'Error';
-        }
-
-        setTimeout(() => {
-          btn.textContent = 'Copy';
-          btn.style.borderColor = 'rgba(255, 255, 255, 0.25)';
-          btn.style.color = 'var(--white)';
-        }, 2200);
+        const isKo = document.documentElement.lang === 'ko';
+        btn.textContent = isKo ? '복사 완료!' : 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
       });
     });
 
-    // 8. Playground Dialog
+    // 7. Playground Dialog
     const playground = document.getElementById('playground');
     const openPlayBtn = document.getElementById('open-playground');
     const closePlayBtn = document.getElementById('close-playground');
@@ -3134,135 +2567,41 @@ next_item = cv.policy.<span class="code-func">recommend</span>(state)
     const playOutput = document.getElementById('play-output');
     const queryInput = document.getElementById('query');
 
-    if (openPlayBtn && playground) {
-      openPlayBtn.addEventListener('click', () => playground.showModal());
-    }
-    if (closePlayBtn && playground) {
-      closePlayBtn.addEventListener('click', () => playground.close());
-    }
-    if (playground) {
-      playground.addEventListener('click', (e) => {
-        if (e.target === playground) {
-          const rect = playground.getBoundingClientRect();
-          if (
-            e.clientX < rect.left ||
-            e.clientX > rect.right ||
-            e.clientY < rect.top ||
-            e.clientY > rect.bottom
-          ) {
-            playground.close();
-          }
-        }
-      });
-    }
+    if (openPlayBtn && playground) openPlayBtn.onclick = () => playground.showModal();
+    if (closePlayBtn && playground) closePlayBtn.onclick = () => playground.close();
 
     if (runExampleBtn && playOutput && queryInput) {
-      runExampleBtn.addEventListener('click', () => {
+      runExampleBtn.onclick = () => {
         const userQuery = queryInput.value.trim() || "I go to meeting yesterday";
         const hasPastTenseError = /go/i.test(userQuery);
 
-        const mockResponse = {
+        playOutput.textContent = JSON.stringify({
           status: "success",
           engine: "Converge Engine LTM v0.1",
           session_id: "sess_sim_092348",
-          user_id: "learner_024",
           input_utterance: userQuery,
           stt_confidence: 0.982,
           parser: {
-            tokens: userQuery.split(" "),
             detected_errors: hasPastTenseError ? [
-              {
-                span: "go",
-                intended: "went",
-                type: "morphosyntactic_tense",
-                concept_id: "past_tense_irregular"
-              }
+              { span: "go", intended: "went", type: "morphosyntactic_tense", concept_id: "past_tense_irregular" }
             ] : []
           },
           memory_state: {
             skill_id: "past_tense_irregular",
             mastery_prior: 0.34,
             mastery_posterior: hasPastTenseError ? 0.38 : 0.45,
-            retention_decay_p: 0.72,
-            last_review_gap_hours: 48
+            retention_decay_p: 0.72
           },
           recommendation: {
             policy: "spacing_retrieval_drill",
-            next_item_id: "past_tense_drill_02",
-            prompt_cue: "Complete sentence using irregular past tense."
-          },
-          latency_breakdown_ms: {
-            stt: 135,
-            ltm_trace: 172,
-            llm_grounding: 390,
-            total_e2e: 697
+            next_item_id: "past_tense_drill_02"
           }
-        };
-
-        playOutput.textContent = JSON.stringify(mockResponse, null, 2);
-      });
+        }, null, 2);
+      };
     }
 
-    // 9. Demo Form Local Summary File
-    const demoForm = document.getElementById('demo');
-    const formStatus = document.getElementById('form-status');
-
-    if (demoForm) {
-      demoForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('email').value.trim();
-        const usecase = document.getElementById('usecase').value.trim() || 'General Learning Intelligence';
-        const message = document.getElementById('message').value.trim() || 'No additional notes.';
-
-        const summaryContent = 
-`==============================================
-CONVERGENCY DEMO INQUIRY SUMMARY
-==============================================
-Date: ${new Date().toISOString()}
-Work Email: ${email}
-Use Case: ${usecase}
-Message: ${message}
-
-Engine Requested: Converge Engine LTM v0.1 (Beta)
-Application Preview: Speak First
-==============================================
-Status: Prepared locally. Ready to share with your evaluation team.`;
-
-        const blob = new Blob([summaryContent], { type: 'text/plain;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `convergency-demo-${Date.now()}.txt`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-
-        if (formStatus) {
-          const isKo = document.documentElement.lang === 'ko';
-          formStatus.style.color = '#059669';
-          formStatus.style.fontWeight = '600';
-          formStatus.textContent = isKo 
-            ? '✓ 데모 요청서 요약 파일(.txt)이 저장되었습니다! 팀 채널이나 담당자에게 공유해 주세요.'
-            : '✓ Demo inquiry summary (.txt) generated! You can share this file with your team.';
-        }
-      });
-    }
-
-    // 10. Spec Sheet Print Trigger
-    const printSpecBtn = document.getElementById('print-spec');
-    if (printSpecBtn) {
-      printSpecBtn.addEventListener('click', () => {
-        document.body.classList.add('print-spec');
-        window.print();
-      });
-      window.addEventListener('afterprint', () => {
-        document.body.classList.remove('print-spec');
-      });
-    }
-
-    // 11. Functional Mobile / Desktop (PC Mode) Switcher
-    const viewportMeta = document.querySelector('meta[name="viewport"]');
+    // 8. PC / Mobile View Toggle
+    const viewportMeta = document.getElementById('viewport-meta');
     const toggleViewportBtn = document.getElementById('toggle-viewport-btn');
     const bannerReturnBtn = document.getElementById('banner-return-btn');
     const labelEn = document.getElementById('view-mode-label-en');
@@ -3271,7 +2610,6 @@ Status: Prepared locally. Ready to share with your evaluation team.`;
 
     function applyViewMode(forcePc) {
       isForcedPcMode = forcePc;
-
       if (isForcedPcMode) {
         document.body.classList.add('force-pc-mode');
         if (viewportMeta) {
@@ -3287,16 +2625,54 @@ Status: Prepared locally. Ready to share with your evaluation team.`;
         if (labelEn) labelEn.textContent = '🖥️ Switch to PC View';
         if (labelKo) labelKo.textContent = '🖥️ PC버전으로 보기';
       }
-
       window.dispatchEvent(new Event('resize'));
-      window.dispatchEvent(new Event('scroll'));
     }
 
-    if (toggleViewportBtn) {
-      toggleViewportBtn.addEventListener('click', () => applyViewMode(!isForcedPcMode));
+    if (toggleViewportBtn) toggleViewportBtn.onclick = () => applyViewMode(!isForcedPcMode);
+    if (bannerReturnBtn) bannerReturnBtn.onclick = () => applyViewMode(false);
+
+    // 9. Demo Form Submission
+    const demoForm = document.getElementById('demo');
+    const formStatus = document.getElementById('form-status');
+    if (demoForm) {
+      demoForm.onsubmit = (e) => {
+        e.preventDefault();
+        if (formStatus) {
+          const isKo = document.documentElement.lang === 'ko';
+          formStatus.style.color = '#059669';
+          formStatus.textContent = isKo 
+            ? '✓ 데모 요청서 작성이 확인되었습니다. 담당자가 곧 연락드립니다.' 
+            : '✓ Demo request confirmed. Our team will contact you shortly.';
+        }
+      };
     }
-    if (bannerReturnBtn) {
-      bannerReturnBtn.addEventListener('click', () => applyViewMode(false));
+
+    // 10. Scroll Listener for Frosted Glass Header and Smooth Element Reveal
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (header) {
+        if (window.scrollY > 20) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }
+    }, { passive: true });
+
+    // IntersectionObserver for Graceful Scroll Reveal (v1.0.6: 0.75s, 28px slide)
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('cv-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.cv-reveal').forEach(el => revealObserver.observe(el));
+    } else {
+      document.querySelectorAll('.cv-reveal').forEach(el => el.classList.add('cv-visible'));
     }
   </script>
 </body>
